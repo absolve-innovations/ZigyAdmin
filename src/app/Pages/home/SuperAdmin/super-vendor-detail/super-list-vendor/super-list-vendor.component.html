@@ -1,0 +1,156 @@
+<div class="app-main__outer">
+    <!-- <div class="app-main__inner">		 -->
+
+
+
+    <div class="admin_a form_dashbord">
+
+        <!-- <div class="text-center d-table">
+            <img src="https://dummyimage.com/100x100/ddd/fff" class="img-responsive rounded-circle">
+            <h3>James Walter</h3>
+        </div> -->
+
+        <div class="d-flex if_xs_btn mt-30">
+            <input type="text" placeholder="Search Vendor" class="btn_border search_here" [(ngModel)]="searchText"
+                (click)="performSearch()" (input)="addSpaceAfterText()" (click)="onSearch(search)">
+            <a style="color: white !important;" class="btn_blue ml-auto" data-toggle="modal" data-target="#myModalpurchase-membership">Add New Vendor</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table admin_table">
+
+                <tr>
+                    <!-- <th>Serial No.</th> -->
+                    <th>Vendor Name</th>
+                    <th>Shop Name</th>
+                    <th>Created By</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr
+                    *ngFor="let item of vendorList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' }  ">
+
+                    <td class="profile">
+                        <!-- <img src="img/product_items.png" class="img-responsive"> -->
+                        {{item?.vendorName}}
+                    </td>
+
+                    <td>{{item?.shopName}}</td>
+                    <td>{{item?.createdBy}}</td>
+                    <!-- <td *ngIf="value == 'Admin'">{{item.statusDisplay}}</td> -->
+                    <td>
+                        <div *ngIf="value == 'SuperAdmin'">
+                            <a style="color: white !important;" class="border-btn greenbutton" *ngIf="item?.statusDisplay == 'Pending'"
+                                (click)="vendorStatusAccept(item)">Accept</a>
+                            <a style="color: white !important;" class="btn_blue redbutton" *ngIf="item?.statusDisplay == 'Pending'"
+                                (click)="vendorStatusReject(item)">Reject</a>
+                            <label *ngIf="item?.statusDisplay == 'Approved'">Accepted</label>
+                            <label *ngIf="item?.statusDisplay == 'Rejected'">Rejected</label>
+                        </div>
+                        <label *ngIf="value == 'Admin'">{{item?.statusDisplay}}</label>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/super-vendor-list/super-vendor-detail/',  item?.vendorId, item?.shopId]"><i
+                                class="fa fa-eye"></i></a>
+                        <a (click)="editPlan(item)"><i class="fa fa-pencil"></i></a>
+                        <a data-toggle="modal" data-target="#list-cross-mess" (click)="delet(item)">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                    <!-- Modal Delete Vendor-->
+                    <div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog"
+                        aria-labelledby="cancel-messLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content warning-content">
+
+                                <div class="modal-body text-center warning-mess-sec">
+                                    <button type="button" class="close float-right" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <img src="assets\img\warning.png">
+                                    <h2>Alert</h2>
+                                    <p>Are You Sure, You want to Delete it?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class=" border-btn" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class=" btn_blue" (click)="deleteVendor()">Yes, Delete
+                                        It</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+
+
+            </table>
+            <div class="no-data text-center" *ngIf="vendorList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+
+        </div>
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page" class="paginate-doctor-list"
+            queryParamsHandling="merge" (pageChange)="refresh()">
+        </pagination-controls>
+    </div>
+</div>
+
+
+
+
+<!-- modal -->
+
+<div class="modal fade" id="myModalpurchase-membership" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content for-payment popup_advance">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <!-- <div><a type="button" class=" btn_blue ml-auto my-3" (click)="purchaseMembershipRoute()">Purchase
+                        Membership</a></div> -->
+
+                <div class="modal-dropdown dropdown w-100 text-center">
+                    <a type="button" class=" btn_blue ml-auto mt-3  dropdown-toggle" style="min-width: 200px;"
+                        id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" style="color: white !important;">Select Membership</a>
+
+                    <div class="sub-modal shadow  dropdown-menu drop-input" id="myDIV3"
+                        aria-labelledby="dropdownMenuButton">
+
+
+                        <button type="submit" class="btn_blue submodal-submit my-3" (click)="purchaseMembershipRoute(1)">Grocery</button>
+                        <button type="submit" class="btn_blue submodal-submit my-3" (click)="purchaseMembershipRoute(2)">Dairy</button>
+                        <button type="submit" class="btn_blue submodal-submit my-3" (click)="purchaseMembershipRoute(3)">Combo</button>
+
+                    </div>
+
+                </div>
+                <!-- <div>  <a type="button" class=" btn_blue ml-auto my-3" style="min-width: 200px;">Add Merchant Id</a> </div> -->
+
+                <div class="modal-dropdown dropdown w-100 text-center">
+                    <a  type="button" class=" btn_blue ml-auto mt-3  dropdown-toggle" style="min-width: 200px; color: white !important;"
+                        id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add
+                        Transaction Id</a>
+                    <form [formGroup]="form">
+                        <div class="sub-modal shadow  dropdown-menu drop-input" id="myDIV3"
+                            aria-labelledby="dropdownMenuButton">
+
+                            <input formControlName="transactionId" type="text" name="bannerimage">
+                            <button type="submit" class="btn_blue submodal-submit my-3"
+                                (click)="checkTransactionId()">Submit</button>
+
+                        </div>
+                    </form>
+                </div>
+
+                <!-- <a type="button" class=" btn_blue ml-auto my-3" >Add Merchant Id</a> -->
+            </div>
+
+
+        </div>
+    </div>
+</div>

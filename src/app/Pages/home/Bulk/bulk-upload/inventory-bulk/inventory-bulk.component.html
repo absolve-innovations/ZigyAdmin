@@ -1,0 +1,95 @@
+<div class="app-main__outer">
+  <div class="admin_a form_dashbord">
+    <div class="top-head mb-40">
+      <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+      <h2>Bulk Upload</h2>
+    </div>
+    <form [formGroup]="form">
+      <div class="vendor-form bg-white">
+        <div class="this_row">
+          <div class="row">
+            <div class="col-lg-4">
+              <label>Main Category</label>
+              <select type="text" class="control-form" formControlName="mainProductCategoryId"
+                (change)="getSubcategoryList(f['mainProductCategoryId'].value)"
+                (change)="getFilterMainCategoryList(f['mainProductCategoryId'].value)">
+                <option value="">Select</option>
+                <option *ngFor="let item of categoryList ; let i = index" [ngValue]="item?.mainProductCategoryId">
+                  {{item?.categoryName}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <label>Sub Category</label>
+              <select type="text" class="control-form" formControlName="subProductCategoryId"
+                (change)="getSubSubcategoryList(s['subProductCategoryId'].value)"
+                (change)="getFilterSubCategoryList(f['subProductCategoryId'].value)">
+                <option value="">Select</option>
+                <option *ngFor="let item of subCategoryList" [ngValue]="item?.subProductCategoryId">
+                  {{item?.categoryName}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <label>Sub Sub Category</label>
+              <select type="text" class="control-form" formControlName="subsubProductCategoryId"
+                (change)="getFilterSubSubCategoryList(ssb['subsubProductCategoryId'].value)">
+
+                <option value="">Select</option>
+                <option *ngFor="let item of SubSubcategoryList" [ngValue]="item?.subSubProductCategoryId">
+                  {{item?.categoryName}}</option>
+              </select>
+            </div>
+            <div class="col-lg-6" (click)="fetchAllData()">
+              <label>Get Excel </label>
+              <div class="mb-3">
+                <label class="browse-butn">Download</label>
+              </div>
+              <i class="fa fa-download bulk-upload-download-icon" aria-hidden="true"></i>
+            </div>
+            <div class="col-lg-6">
+              <label>Upload Excel</label>
+              <div class="browse-butn">
+                <div class="input-group ">
+                  <input type="file" name="photo" id="upload-photo" (change)="excelChangeEventUpload($event)"
+                    onchange="displayFileName()" placeholder="Select Excel file" formControlName="document" />
+                  <p id="file-name" class="file-placeholder">Select Excel file</p>
+                </div>
+                <i class="fa fa-upload bulk-upload-download-icon" aria-hidden="true"></i>
+              </div>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12  text-center">
+              <button class="border-btn" type="submit" value="" data-toggle="modal"
+                data-target="#cancel-mess">Cancel</button>
+              <button class="btn_blue" type="submit" (click)="fileChangeEvents()">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content warning-content">
+
+      <div class="modal-body text-center warning-mess-sec">
+        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <img src="assets\img\warning.png">
+        <h2>Alert</h2>
+        <p>Are You Sure, You want to Cancel it?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="app-main__outer">
+    <!-- <div class="app-main__inner">		 -->
+		
+		
+		
+				<div class="admin_a form_dashbord">	
+
+                    <div class="top-head">
+                        <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+                        <h2>Customer Detail</h2>
+                      </div>
+<!--       
+        <div class="vendor-form image-back mt-40 bg-white" >
+
+            <img class="image" [src]="rootUrl + detail?.profilePic">
+
+        </div> -->
+
+        <div class="vendor-form mt-40 bg-white" >
+
+            <div class="this_row">
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>First Name:</dt>
+                            <dd>{{customerDetail?.fullName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Phone Number:</dt>
+                            <dd>{{customerDetail?.phoneNumber}}</dd>
+                        </dl>
+                       
+                        <dl class="d-flex inform_text">
+                            <dt>Address Type:</dt>
+                            <dd>{{customerDetail?.addressType}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Street Address:</dt>
+                            <dd>{{customerDetail?.streetAddresss}}</dd>
+                        </dl>
+                       
+                        <dl class="d-flex inform_text">
+                            <dt>City:</dt>
+                            <dd>{{customerDetail?.city}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Distance:</dt>
+                            <dd>{{customerDetail?.distance}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>House No:</dt>
+                            <dd>{{customerDetail?.houseNoOrBuildingName}}</dd>
+                        </dl>
+                    </div>
+                    
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Wallet Amount:</dt>
+                            <dd>{{customerDetail?.walletAmount}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt> Alternate Phone Number:</dt>
+                            <dd>{{customerDetail?.dialCode}}{{customerDetail?.alternatePhoneNumber}}</dd>
+                        </dl>
+                     
+          
+                        <dl class="d-flex inform_text">
+                            <dt>Pin Code:</dt>
+                            <dd>{{customerDetail?.pincode}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Near Landmark:</dt>
+                            <dd>{{customerDetail?.nearbyLandMark}}</dd>
+                        </dl>
+                           <dl class="d-flex inform_text">
+                            <dt>State:</dt>
+                            <dd>{{customerDetail?.state}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Duration:</dt>
+                            <dd>{{customerDetail?.duration}}</dd>
+                        </dl>
+                    
+
+                    </div>
+
+                </div>
+            </div>
+        </div> 
+    </div>
+
+
+</div>
+

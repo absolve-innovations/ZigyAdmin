@@ -1,0 +1,67 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Banner Detail</h2>
+        </div>
+
+        <div class="vendor-form mt-40" style="background:#fff; padding:25px;">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text" style="margin:0px;">
+                            <dt>Date:</dt>
+                            <dd>{{ShopBannerdetail?.createDate}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text" style="margin:0px;"
+                            *ngIf="ShopBannerdetail?.mainProductCategoryName != null">
+                            <dt>Main Category:</dt>
+                            <dd>{{ShopBannerdetail?.mainProductCategoryName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text" style="margin:0px;"
+                            *ngIf="ShopBannerdetail?.subSubProductCategoryName != null">
+                            <dt>Sub Sub Category:</dt>
+                            <dd>{{ShopBannerdetail?.subSubProductCategoryName}}</dd>
+                        </dl>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 ">
+
+                        <dl class="d-flex inform_text" style="margin:0px;">
+                            <dt>Banner:</dt>
+                            <dd>{{ShopBannerdetail?.bannerType}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text" style="margin:0px;"
+                            *ngIf="ShopBannerdetail?.subProductCategoryName != null">
+                            <dt>Sub Category:</dt>
+                            <dd>{{ShopBannerdetail?.subProductCategoryName}}</dd>
+                        </dl>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vendor-form mt-40" style="background:#fff; padding:25px;">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+
+                        <h3>Banner Image</h3>
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <img [src]="rootUrl + ShopBannerdetail?.bannerImage" class="img-responsive w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

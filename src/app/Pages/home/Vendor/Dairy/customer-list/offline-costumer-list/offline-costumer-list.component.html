@@ -1,0 +1,88 @@
+<div class="app-main__outer">
+    <!-- <div class="app-main__inner">		 -->
+
+
+
+    <div class="admin_a form_dashbord">
+
+        <div class="d-flex if_xs_btn mt-30">
+            <input type="text" placeholder="Search Here" class="btn_border search_here"
+                [(ngModel)]="searchText" (click)="performSearch()" (input)="addSpaceAfterText()" (click)="onSearch(search)">
+            <a [routerLink]="['//vendor/setting/offline-costumer-list/add-edit-customer']" class="btn_blue ml-auto">Add New Customer</a>
+            
+        </div>
+
+        <div class="table-responsive">
+            <form [formGroup]="form">
+                <table class="table admin_table">
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Phone No.</th>
+                        <th>Address</th>
+                        <th>Wallet Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr
+                        *ngFor="let item of customerList  | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' } ">
+
+                        <td class="profile checkbox-td">
+                          
+                            {{item?.customerFirstName}} {{item?.customerLastName}} 
+                        </td>
+                        <!-- <td class="profile"> <img class="img-responsive" [src]="rootUrl + item?.profilepic"></td> -->
+                        <td>{{item?.customerPhone}}</td>
+                        <td>{{item?.customerAddress}}</td>
+                  <td>{{item?.walletAmount}}</td>
+                        <td>
+                            <a [routerLink]="['/vendor/setting/offline-costumer-list/detail/',item.vendorCustomerId ] "><i
+                                    class="fa fa-eye"></i></a>
+                                    <a 
+                                    (click)="passId(item)"><i
+                                        class="fa fa-pencil"></i>
+                                </a>
+
+                                    <a data-toggle="modal" data-target="#list-cross-mess" (click)="delet(item?.vendorCustomerId)">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                        </td>
+
+                          <!-- Modal Delete Vendor-->
+                    <div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog"
+                    aria-labelledby="cancel-messLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content warning-content">
+
+                            <div class="modal-body text-center warning-mess-sec">
+                                <button type="button" class="close float-right" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <img src="assets\img\warning.png">
+                                <h2>Alert</h2>
+                                <p>Are You Sure, You want to Delete it?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class=" border-btn" data-dismiss="modal">Cancel</button>
+                                <button type="button" class=" btn_blue" (click)="deleteCustomer()">Yes, Delete
+                                    It</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    </tr>
+
+                </table>
+            </form>
+            <div class="no-data text-center" *ngIf="customerList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+
+        </div>
+
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page"
+        class="paginate-doctor-list" queryParamsHandling="merge" (pageChange)="refresh()">
+    </pagination-controls>
+
+    </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="app-main__outer">
+	<div class="admin_a form_dashbord">
+		<h1>Admin Dashboard</h1>
+
+		<div class="row">
+			<div class="col-lg-6 col-md-12">
+
+				<div class="row align-items-end">
+					<div class="col-md-5">
+						<label>Date</label>
+						<input type="text" placeholder="From Date" class="form-control">
+					</div>
+
+					<div class="col-md-5 text-right">
+						<label><a href="#">Reset</a></label>
+						<input type="text" placeholder="To date" class="form-control">
+					</div>
+
+					<div class="col-md-2 xs-mt-30">
+						<button type="submit" class="go_now" style="color: white;"><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-lg-6 col-md-12 mt-30">
+				<label>User Count</label>
+				<div class="half_box">
+					<div class="d-flex align-items-center" style="background:#eee;">
+						<h5>Total User : 14</h5>
+						<a href="#">View Report</a>
+					</div>
+					<canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions"
+						[plugins]="barChartPlugins" [type]="barChartType" (chartHover)="chartHovered($event)"
+						(chartClick)="chartClickeds($event)">
+					</canvas>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-12 mt-30">
+				<label>Sales Over Time</label>
+				<div class="half_box">
+
+					<div class="d-flex align-items-center" style="background:#eee;">
+						<h5>Sales YTD</h5>
+						<a href="#">View Report</a>
+					</div>
+					<div style="display: block">
+						<canvas baseChart class="chart" [data]="bubbleChartData" [options]="bubbleChartOptions"
+							[legend]="true" [type]="bubbleChartType">
+						</canvas>
+					</div>
+				</div>
+			</div>
+			<!-- 					
+					<div class="col-lg-6 col-md-12 mt-30">
+						<label>Sales Over Time</label>
+						<div class="half_box">
+							
+							<div class="d-flex align-items-center" style="background:#eee;">
+								<h5>Sales YTD</h5>
+								<a href="#">View Report</a>
+							</div>							
+                            <div style="display: block">
+                                <canvas baseChart class="chart"
+                                  [data]="bubbleChartData"
+                                  [options]="bubbleChartOptions"
+                                  [legend]="true"
+                                  [type]="bubbleChartType">
+                                </canvas>
+                              </div>
+						</div>
+					</div> -->
+
+			<!-- <div class="col-lg-6 col-md-12 mt-30">
+						<label>Sales Over Time</label>
+						<div class="half_box">
+							
+							<div class="d-flex align-items-center" style="background:#eee;">
+								<h5>Sales YTD</h5>
+								<a href="#">View Report</a>
+							</div>
+                            
+                            <canvas baseChart class="chart"
+        [data]="pieChartData"
+        [type]="pieChartType"
+        [options]="pieChartOptions">
+</canvas>
+							
+						</div>
+					</div> -->
+
+			<!-- <div class="col-lg-6 col-md-12 mt-30">
+						<label>Sales Over Time</label>
+						<div class="half_box">
+							
+							<div class="d-flex align-items-center" style="background:#eee;">
+								<h5>Sales YTD</h5>
+								<a href="#">View Report</a>
+							</div>							
+							
+						</div>
+					</div> -->
+
+			<!-- <div class="col-lg-6 col-md-12 mt-30">
+						<label>Sales Over Time</label>
+						<div class="half_box">
+							
+							<div class="d-flex align-items-center" style="background:#eee;">
+								<h5>Sales YTD</h5>
+								<a href="#">View Report</a>
+							</div>							
+							
+						</div>
+					</div> -->
+
+		</div>
+
+	</div>
+</div>

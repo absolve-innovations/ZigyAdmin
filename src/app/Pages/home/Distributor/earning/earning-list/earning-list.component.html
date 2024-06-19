@@ -1,0 +1,75 @@
+<div class="app-main__outer">
+    <div class="admin_a form_dashbord">
+        <div class="d-flex if_xs_btn mb-30">
+            <input type="text" placeholder="Search Vendor " class="btn_border search_here">
+            <!-- <a data-toggle="modal" data-target="#myModalpurchase-membership" class="btn_blue ml-auto"> Add Vendor </a> -->
+        </div>
+
+        <div class="col-lg-8 col-md-12 mb-30 p-0">
+            <div class="row align-items-end">
+                <div class="col-md-5">
+                    <div class="cate-align w-100">
+                        <label>Month</label>
+                        <select type="text" class="control-form mr-20 btn_border">
+                            <option>Select </option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="cate-align w-100">
+                        <label>Year</label>
+                        <select type="text" class="control-form mr-20 btn_border">
+                            <option>Select </option>
+                            <option value="">2022</option>
+                            <option value="">2023</option>
+                            <option value="">2024</option>
+                            <option value="">2025</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table admin_table table-striped">
+
+                <tr>
+                    <th>Vendor Name</th>
+                    <th>Plan Name</th>
+                    <th>Create Date</th>
+                    <th>Reward Amount</th>
+                </tr>
+
+                <tr *ngFor="let item of earningList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' }  ">
+                    <td>{{item?.vendorName}}</td>
+                    <td>{{item?.planName}}</td>
+                    <td>{{item?.createDate}}</td>
+                    <td> &#8377; <span>{{item?.rewardAmount}}</span>
+                        <a [routerLink]="['/earning-list/earning-detail']">
+                            <i class="fa fa-eye earning-table"></i>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="earning-footer">
+            <h3>Total Earning </h3>
+            <h3> &#8377; <span> {{totalEarning}}</span></h3>
+        </div>
+
+
+    </div>
+</div>

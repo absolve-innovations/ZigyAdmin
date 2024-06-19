@@ -1,0 +1,67 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head ">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Order Product Detail</h2>
+          </div>
+
+        <div class="object-product-detail-img image-back mt-40 mx-auto" style="background: #fff; padding-bottom: 60px;">
+            <img class="image"
+            [src]="rootUrl + data?.productImage"> </div>
+
+        <div class="vendor-form mt-40" style="background: #fff; padding-bottom: 60px;">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Product Name:</dt>
+                            <dd>{{data?.productName}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      
+                        <dl class="d-flex inform_text">
+                            <dt>MRP:</dt>
+                            <dd>{{data?.totalMrp}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Discount:</dt>
+                            <dd>{{data?.discount}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Total Discount Amount:</dt>
+                            <dd>{{data?.totalDiscountAmount}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Product Count In Cart:</dt>
+                            <dd>{{data?.productCountInCart}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Shipping Charges:</dt>
+                            <dd>{{data?.shippingCharges}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>SKUID:</dt>
+                            <dd>{{data?.skuid}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Selling Price:</dt>
+                            <dd>{{data?.shippingCharges}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Discount Type:</dt>
+                            <dd>{{data?.discountType}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Selling Price Per Item:</dt>
+                            <dd>{{data?.sellingPricePerItem}}</dd>
+                        </dl>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

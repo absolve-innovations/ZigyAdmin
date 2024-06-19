@@ -1,0 +1,50 @@
+<div class="app-main__outer">						
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Area</h2>
+          </div>
+        
+        <form [formGroup]="form">
+        <div class="vendor-form mt-30 bg-white pb-60">				
+            
+            <div class="this_row">
+                <div class="row">								
+              
+                  
+                    <div class="col-lg-12 col-md-12" >
+                        <label>Address Street 1 <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <textarea type="text" class="control-form" formControlName="streetAddress1"></textarea>
+                        <div *ngIf="submitted && f['streetAddress1'].errors" class="invalid-formdata">
+                            Address is required.
+                           </div>
+                    </div>
+                    
+                    <div class="col-lg-12 col-md-12">
+                        <label>Address Street 2</label>
+                        <textarea type="text" class="control-form" formControlName="streetAddress2"></textarea>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <label>Address Street 3</label>
+                        <textarea type="text" class="control-form" formControlName="streetAddress3"></textarea>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <label>Address Street 4</label>
+                        <textarea type="text" class="control-form" formControlName="streetAddress4"></textarea>
+                    </div>
+                    <div class="col-lg-12 col-md-12 mt-40 text-center">
+                        <button class="btn_blue " type="submit" (click)="postArea()">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form><!-- end first form -->
+            
+        </div>
+        
+    </div>	
+
+

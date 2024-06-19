@@ -1,0 +1,64 @@
+<div class="app-main__outer">
+  <div class="admin_a">
+    <div class="top-head">
+      <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+      <h2>Add Notification</h2>
+    </div>
+
+    <div class="vendor-form bg-white mt-30 membership-section">
+      <form [formGroup]="form">
+        <div class="this_row">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <label>Title</label>
+              <input type="text" class="control-form" formControlName="title">
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <label>Broadcast Notification Send To</label>
+              <select type="text" class="control-form mb-0 btn_border" formControlName="sendToRole">
+                <option value="" disabled>Select </option>
+                <option value="Vendor">Vendor</option>
+                <option value="Admin">Admin</option>
+                <option value="Distributor">Distributor</option>
+                <option value="Customer">Customer</option>
+
+              </select>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <label>Notification Description</label>
+              <textarea type="text" class="control-form " formControlName="description"></textarea>
+            </div>
+
+            <div class="col-lg-12 col-md-12 text-center mt-20">
+              <button type="submit" class="border-btn" data-toggle="modal" data-target="#cancel-mess">Cancel</button>
+              <button type="submit" class="btn_blue" (click)="postNotification()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content warning-content">
+
+      <div class="modal-body text-center warning-mess-sec">
+        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <img src="assets\img\warning.png">
+        <h2>Alert</h2>
+        <p>Are You Sure, You want to Cancel it?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn_blue" (click)="backClickedreload()">Yes, Cancel It</button>
+      </div>
+    </div>
+  </div>
+</div>

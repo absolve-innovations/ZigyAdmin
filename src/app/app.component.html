@@ -1,0 +1,8 @@
+
+
+
+<router-outlet *ngIf="!isOffline"></router-outlet>
+<div *ngIf="isOffline">
+    <p>Internet connection is not available. Please check your connection.</p>
+  </div>
+<ngx-spinner type="ball-scale-multiple" color = "black"><p style="color: black" > Loading... </p></ngx-spinner>

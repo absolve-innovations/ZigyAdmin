@@ -1,0 +1,86 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2> Delivery Man </h2>
+        </div>
+
+        <form [formGroup]="form">
+
+            <div class="vendor-form bg-white mt-40">
+
+                <!-- <div class="text-center mb-30">
+                    <h3>Add Profile Picture </h3>
+                </div> -->
+
+                <div class="this_row">
+                    <div class="row ">
+
+
+                        <!-- <div class="col-lg-12">
+                            <h3>Personal Detail</h3>
+                        </div> -->
+                        <div class="col-lg-6 col-md-12">
+                            <label>Delivery Man Name</label>
+                            <input type="text" formControlName="deliveryManName" class="control-form" appAlphabeticOnly >
+                            <div *ngIf="submitted && f['deliveryManName'].errors" class="invalid-formdata">
+                                Delivery man name is required.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Area Code
+                            </label>
+                            <input type="text" class="control-form " formControlName="areaCodeId" OnlyNumbers>
+                            <div *ngIf="submitted && f['areaCodeId'].errors" class="invalid-formdata">
+                               Area code is required.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Delivery Man Phone Number</label>
+                            <input type="text" class="control-form " formControlName="deliveryManPhoneNumber" OnlyNumbers>
+                          <div *ngIf="submitted && f['deliveryManPhoneNumber'].errors" class="invalid-formdata">
+                           Delivery man phone number must be 10 digits.
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Delivery Man Whatsapp Number</label>
+                            <input type="text" class="control-form " formControlName="deliveryManWhatsappNumber" OnlyNumbers>
+                            <div *ngIf="submitted && f['deliveryManWhatsappNumber'].errors" class="invalid-formdata">
+                                Delivery man whatsapp number must be 10 digits.
+                              </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form bg-white ">
+                <div class="col-lg-12 col-md-12  text-center">
+                    <button class="border-btn" type="submit" value="" data-toggle="modal" data-target="#cancel-mess">Cancel</button>
+                    <button class="btn_blue " type="submit" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content warning-content">
+        
+        <div class="modal-body text-center warning-mess-sec">
+            <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <img src="assets\img\warning.png">
+            <h2>Alert</h2>
+          <p>Are You Sure, You want to Cancel it?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+          <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+        </div>
+      </div>
+    </div>
+  </div>

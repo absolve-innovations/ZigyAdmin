@@ -1,0 +1,194 @@
+<div class="app-main__outer">
+    <div class="admin_a form_dashbord">
+        <div class="top-head" *ngIf="login == 'SuperAdmin'  && 'Admin' ">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Vendor Product List</h2>
+        </div>
+        <!-- <div class="media mb-5" *ngIf="'Vendor' == role1">
+            <img class="align-self-center mr-3 welcome-image" [src]="rootUrl + image" alt="user">
+            <div class="media-body align-self-center">
+                <p class="heading" *ngIf="'Vendor' == role">Welcome, <span>{{shopName}}</span></p>
+            </div>
+        </div> -->
+
+        <div class="d-flex flex-wrap if_xs_btn mt-30 ">
+            <input type="text" placeholder="Search Product" href="#" class="btn_border search_here"
+                [(ngModel)]="searchText" (click)="performSearch()"  (input)="addSpaceAfterText()" (click)="onSearch(search)">
+
+
+            <a (click)="passId()" class="btn_blue ml-auto" style="color: white !important;">Add New Product</a>
+            <a *ngIf="login == 'Admin'" (click)="bulk()" class="btn_blue ml-20 last_atag"
+                style="color: white !important;">Bulk Upload</a>
+            <a *ngIf="login ==  'SuperAdmin'" (click)="bulk()" class="btn_blue ml-20 last_atag"
+                style="color: white !important;">Bulk Upload</a>
+            <a *ngIf="login == 'Vendor'" [routerLink]="['/vendor-products-list/vendor-bulk-upload']"
+                class="btn_blue ml-20 last_atag" style="color: white !important;">Bulk
+                Upload</a>
+
+        </div>
+
+
+        <form [formGroup]="form">
+            <div class="d-flex flex-wrap if_xs_btn  justify-content-between drop-section">
+
+                <div class="cate-align">
+                    <label>Brand</label>
+                    <select type="text" class="control-form mr-20 btn_border" formControlName="brandId"
+                        (click)="performSearch()" (change)="getFilterBrandList(fb['brandId'].value)">
+                        <option value="">Select </option>
+                        <option *ngFor="let item of brandList" [ngValue]="item.brandId">{{item?.brandName}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap if_xs_btn mb-30 justify-content-between drop-section">
+                <div class="cate-align">
+                    <label>Main Category</label>
+                    <!-- (change)="getSubcategoryList(f['countryId'].value)" -->
+                    <select type="text" class="control-form mr-20 btn_border" formControlName="mainProductCategoryId"
+                        (click)="performSearch()" (change)="getFilterMainCategoryList(f['mainProductCategoryId'].value)"
+                        (change)="getSubcategoryList(f['mainProductCategoryId'].value)">
+                        <option value="" disabled>Select </option>
+                        <option *ngFor="let item of categoryList" [ngValue]="item?.mainProductCategoryId">
+                            {{item.categoryName}}</option>
+
+                    </select>
+                </div>
+
+
+                <div class="cate-align">
+                    <label>Sub Category</label>
+                    <select type="text" class="control-form mr-20 btn_border" formControlName="subProductCategoryId"
+                        (change)="getSubSubcategoryList(s['subProductCategoryId'].value)"
+                        (change)="getFilterSubCategoryList(s['subProductCategoryId'].value)">
+                        <option value="" disabled>Select </option>
+                        <option *ngFor="let item of subCategoryList" [ngValue]="item?.subProductCategoryId">
+                            {{item?.categoryName}}</option>
+                    </select>
+                </div>
+
+
+                <div class="cate-align">
+                    <label>Sub Sub Category</label>
+                    <select type="text" class="control-form btn_border" formControlName="subSubProductCategoryId"
+                        (change)="getFilterSubSubCategoryList(ssb['subSubProductCategoryId'].value)">
+                        <option value="" disabled>Select </option>
+                        <option *ngFor="let item of SubSubcategoryList" [ngValue]="item?.subSubProductCategoryId">
+                            {{item?.categoryName}}</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table admin_table">
+
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Image</th>
+                        <th>Quantity</th>
+                        <th>Inventory</th>
+                        <th>Category Name</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                    <tr
+                        *ngFor="let item of productList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' }  ">
+
+                        <td class="profile checkbox-td">
+                            <!-- <form> -->
+                            <div class="form-check table-checkbox">
+                                <input type="checkbox" class="form-check-input" (change)="status(item)"
+                                    [checked]="selectedItem === item">
+                            </div>
+                            <!-- </form>   -->
+                            {{item?.productName}}
+                        </td>
+                        <td class="profile"><img [src]="rootUrl + item?.productImage1"></td>
+                        <td>{{item?.quantity}} {{item?.quantityTypeName}}</td>
+
+                        <td *ngIf='!item.isEdit'> {{item?.inStock}} inStock </td>
+                        <td *ngIf='item.isEdit'>
+                            <div class="form-group  td-inputtext">
+                                <input type="text" class="form-control" [value]="item?.inStock"
+                                    formControlName="inStock" appAutofocus OnlyNumbers>
+                                <span><a (click)="updateProductStock()">Save</a></span>
+                            </div>
+                        </td>
+                        <td> {{item?.mainProductCategoryName}}</td>
+                        <td>
+
+                            <!-- {{item.status}} -->
+                            <label class="switch" *ngIf="item.status == 0">
+                                <span>Pending</span>
+                            </label>
+                            <label class="switch" *ngIf="item.status == 1">
+                                <input type="checkbox" checked (click)="checkActiveStatus(item.productId)">
+                                <span class="slider round"></span>
+                                <!-- <p>Active</p> -->
+                            </label>
+                            <label class="switch" *ngIf="item.status == 2">
+                                <input type="checkbox" (click)="checkInactiveStatus(item.productId)">
+                                <span class="slider round"></span>
+                                <!-- <p>UnActive</p> -->
+                            </label>
+
+
+                        </td>
+                        <td>
+                            <a (click)="productdetail(item)">
+                                <i class="fa fa-eye">
+                                </i>
+                            </a>
+                            <a *ngIf="login !== 'Distributor'" (click)="editproduct(item)"><i class="fa fa-pencil"></i>
+                            </a>
+                            <!-- <a (click)="deleteProduct(item.productId)">
+                            <i class="fa fa-times"
+                                ></i>
+                        </a> -->
+                            <a *ngIf="login !== 'Distributor'" data-toggle="modal" data-target="#list-cross-mess"
+                                (click)="delet(item)">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="no-data text-center" *ngIf="productList?.length < 1">
+                    <img src="assets/img/NO DATA.png">
+                </div>
+
+                <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page"
+                    class="paginate-doctor-list" queryParamsHandling="merge" (pageChange)="refresh()">
+                </pagination-controls>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content warning-content">
+
+            <div class="modal-body text-center warning-mess-sec">
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="assets\img\warning.png">
+                <h2>Alert</h2>
+                <p>Are You Sure, You want to Delete it?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" border-btn" data-dismiss="modal">Cancel</button>
+                <button type="button" class=" btn_blue" (click)="deleteProduct()">Yes, Delete It</button>
+            </div>
+        </div>
+    </div>
+</div>

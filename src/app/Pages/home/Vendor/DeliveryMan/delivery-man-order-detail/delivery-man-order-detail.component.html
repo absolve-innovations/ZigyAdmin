@@ -1,0 +1,268 @@
+<div class="app-main__outer">
+    <div class="admin_a form_dashbord">
+      <form [formGroup]="form">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Delivery Man Order Detail</h2>
+        </div>
+
+        <div class="vendor-form mt-40 bg-white">
+
+            <div class="this_row">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Delivery Man Name:</dt>
+                            <dd>{{deliveryManDetail?.deliveryManName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Timing:</dt>
+                            <dd>{{deliveryManDetail?.timing}}</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Area Code:</dt>
+                            <dd>{{deliveryManDetail?.areaCodeId}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Status:</dt>
+                            <dd>{{deliveryManDetail?.status}}</dd>
+                        </dl>
+
+                    </div>
+
+                    <!-- <div class="col-md-3  cate-align " style="margin: 0px;">
+                      <label>Order Type</label>
+                      <select type="text"   formControlName="isDairyProduct"
+                          class="control-form mr-20 btn_border">
+                    
+                          <option value="" selected>All</option>
+                          <option value="1">Dairy</option>
+                          <option value="2">Grocery</option>
+
+                      </select>
+                  </div> -->
+                </div>
+            </div>
+
+
+            <!-- end first form -->
+
+            <!-- <div class="vendor-form mt-30"> -->
+
+            <h3 class="mt-40">Customer List</h3><!-- Title Here -->
+            <div class="col-lg-12 p-0">
+                <div class="table-responsive mt-20">
+              
+                    <!-- <table class="fold-table table table-tabs table admin_table  product-detail-table table my-rule">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Total Product</th>
+                                <th>Selling Price</th>
+                                <th>Order Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let item of deliveryManDetail?.orderList; let i = index ">
+                                <tr class="view" (click)="click(item.orderDetailId, i)">
+                                  <td>{{item?.customerFirstName}} {{item?.customerLastName}}</td>
+                                  <td>{{item?.totalProducts}}</td>
+                                  <td>{{item?.totalSellingPrice}}</td>
+                                  <td>{{item?.orderStatus}}</td>
+                                </tr>
+                                <tr class="fold" *ngIf="openRowIndex === i">
+                                  <td class="fold-parents" colspan="4">
+                                  
+                                      <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>Product name</th>
+                                            <th>Quantity</th>
+                                            <th>Selling Price</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let product of item.orderedProducts">
+                                            <td>{{product?.productName}}</td>
+                                            <td>{{product?.quantity}} {{product?.quantityTypeName}}</td>
+                                            <td>{{product?.totalSellingPrice}}</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                 
+                                  </td>
+                                </tr>
+                              </ng-container>
+                        </tbody>
+                    </table> -->
+
+
+
+                    <table class="table my-rule">
+						
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Total Product</th>
+                        <th>Selling Price</th>
+                        <th>Order Status</th>
+
+                    </tr>
+                      <ng-container *ngFor="let item of deliveryManDetail?.orderList; let i = index " >
+                      <tr class="view" (click)="click(item.orderDetailId, i)">
+                        <td>{{item?.customerFirstName}} {{item?.customerLastName}}</td>
+                        <td>{{item?.totalProducts}}</td>
+                        <td>{{item?.totalSellingPrice}}</td>
+                        <td>{{item?.orderStatus}}</td>
+                      </tr>
+          
+                      <tr class="fold" *ngIf="openRowIndex === i">
+                        <td class="fold-parents" colspan="4">
+                          <table class="table" style="box-shadow: 0px 8px 13px #3333332e; margin: 0px;">
+                            <thead>
+                              <tr>
+                                <th>Product name</th>
+                                <th>Quantity</th>
+                                <th>Selling Price</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let product of item.orderedProducts">
+                                <td>{{product?.productName}}</td>
+                                <td>{{product?.quantity}} {{product?.quantityTypeName}}</td>
+                                <td>{{product?.totalSellingPrice}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+          
+                      <!-- <tr class="view">
+                        <td>1</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Lorem</td>
+                      </tr> -->
+          </ng-container>
+                    </table>
+
+
+                
+          
+                </div>
+            </div>
+
+
+            <h3 class="mt-40">Additional Product</h3>
+            <div class="this_row">
+              <div class="row">
+              
+                <div class="col-lg-8 col-md-12">
+                  <label>Select Product</label>
+                  <ng-multiselect-dropdown   [(ngModel)]="selectedItems" [settings]="dropdownSettings" [data]="bindproductList"  (onSelect)="addeditProduct(selectedItems)"
+                  formControlName="productIds" >
+                </ng-multiselect-dropdown>
+                  <!-- <label *ngIf="submitted && f['discountType'].errors" class="invalid-formdata">
+                                  Discount Type is required
+                                </label> -->
+                </div>
+                
+      
+                </div>
+                </div>
+
+
+
+                <h3 class="mt-40">Product List</h3>
+            <div class="table-responsive">
+              <table class="table admin_table">
+
+                  <tr>
+                      <!-- <th>Serial No.</th> -->
+                      <th>Product Name</th>
+                      <th>Quantity</th>
+                      <th>Selling Price</th>
+                      <th>Total Item</th>
+                      <th>Returned Item</th>
+                      <th>Final Price</th>
+                      <th>Action</th>
+                  </tr>
+                  <tr *ngFor="let item of additionList?.productList"
+                      >
+                      <td class="profile checkbox-td">
+                        <!-- <form> -->
+                        <div class="form-check table-checkbox">
+                            <input type="checkbox" class="form-check-input" (change)="status(item)" [checked]="selectedItem === item">
+                        </div>
+                        <!-- </form>   -->
+                        {{item?.productName}}
+                    </td>
+                      <td>{{item?.quantity}} {{item?.quantityTypeName}}</td>
+                      <td>{{item?.sellingPricePerItem}}</td>
+                      <!-- <td *ngIf="login == 'Vendor'"> -->
+                        <td *ngIf='!item.isEdit'>{{item?.totalItem}}</td>
+                      <td  *ngIf='item.isEdit'>
+                        <div class="form-group  td-inputtext additional">
+                          <input type="text" class="form-control"
+                          [value]="item?.totalItem"  formControlName="totalItem"  appAutofocus OnlyNumbers>
+                          <span><a >Save</a></span>
+                      </div>
+                      </td>
+
+                      <td  *ngIf='!item.isEdit'>{{item?.returedItem}}</td>
+                      <td  *ngIf='item.isEdit'>
+                        <div class="form-group  td-inputtext additional">
+                          <input type="text" class="form-control"
+                          [value]="item?.returedItem"   formControlName="returedItem"   appAutofocus OnlyNumbers>
+                          <span><a >Save</a></span>
+                      </div>
+                      </td>
+                      <td>
+                        {{item?.totalSellingPrice}}
+                      </td>
+                      <td>
+                    <a 
+                        (click)="delete(item?.additionalProductId)"><i
+                        class="fa fa-times"></i></a>
+
+
+                          <!-- <a (click)="edit(item)"><i
+                                      style="background:#002C6F; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                                      class="fa fa-pencil"></i></a> -->
+                          <!-- <a (click)="deleteMainCategory(item.mainProductCategoryId)"><i
+                                  style="background:#9f0a2a; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                                  class="fa fa-times"></i></a> -->
+
+                      </td>
+                      <!-- <td>
+                      <a>
+                          <i
+                              style="background:#d1d5da; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                              class="fa fa-eye disabled-butn"></i>
+                      </a>
+                      <a>
+                          <i
+                              style="background:#d1d5da; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                              class="fa fa-times disabled-butn "></i>
+                      </a>
+                  </td> -->
+                  </tr>
+             
+              </table>
+              <!-- <pagination-controls (pageChange)="page3 = $event; refresh()" [id]="'3'" pageSize="10"
+                  initialPage="page3"></pagination-controls> -->
+
+
+
+          </div>
+        </div>
+        </form>
+    </div>
+
+
+</div>

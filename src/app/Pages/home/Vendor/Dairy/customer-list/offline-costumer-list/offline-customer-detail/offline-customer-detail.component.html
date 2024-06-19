@@ -1,0 +1,80 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Offline Customer Detail</h2>
+          </div>
+
+        <div class="vendor-form mt-40 bg-white pb-60">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Customer Name:</dt>
+                            <dd>{{detail?.customerFirstName}} {{detail?.customerLastName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Phone No:</dt>
+                            <dd>{{detail?.customerPhone}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Last Wallet Amount:</dt>
+                            <dd>{{detail?.lastWalletAmount}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                          
+                            <dt>Create Date:</dt>
+                            <dd>{{detail?.createDate}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Address:</dt>
+                            <dd>{{detail?.customerAddress}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Subscription Type:</dt>
+                            <dd>{{detail?.subscriptionType}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Subscription Start Date:</dt>
+                            <dd>{{detail?.subscriptionStartDate}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Current Wallent Amount:</dt>
+                            <dd>{{detail?.walletAmount}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Gender:</dt>
+                            <dd>{{detail?.customerGender}}</dd>
+                        </dl>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+  
+     
+
+
+
+<!--  -->
+
+
+
+
+
+
+
+        
+
+    </div>
+</div>
+
+
+
+

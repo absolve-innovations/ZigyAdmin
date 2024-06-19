@@ -1,0 +1,191 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <h2>Dairy Details</h2>
+        <form [formGroup]="form">
+            <div class="vendor-form bg-white mt-40">
+                <div class="this_row">
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Maximum Wallet Amount</label>
+                            <input type="text" formControlName="maximumWalletAmount" class="control-form" numbersOnly>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Minimum Wallet Amount
+                            </label>
+                            <input type="text" class="form-control" formControlName="minimumWalletAmount" numbersOnly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="checkbox_items">
+                                <div class="d-flex align-items-center"
+                                    style="border-bottom: 1px solid #ddd; padding-bottom: 8px;">
+                                    <input class="checkbox-ME" type="checkbox" formControlName="morningCheckbox"
+                                        (click)="toggleCheckbox1()" #morningCheckboxRef>
+                                    <label>Morning</label>
+                                </div>
+
+                                <div class="mt-20 inbx_items">
+                        a            <label>Order Time</label>
+                                    <input type="time" class="form-control" formControlName="morningOrderByTiming">
+                                    <label>Delivery Time</label>
+                                    <input type="time" class="form-control" formControlName="morningDailyDeliveryTime">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="checkbox_items">
+                                <div class="d-flex align-items-center" style=" border-bottom: 1px solid #ddd;
+                            padding-bottom: 8px;">
+                                    <input class="checkbox-ME" type="checkbox" id="eveningCheckbox"
+                                        formControlName="eveningCheckbox" (click)="toggleCheckbox()"
+                                        #eveningCheckboxRef>
+                                    <label for="eveningCheckbox">Evening</label>
+                                </div>
+
+                                <div class="mt-20 inbx_items">
+                                    <label> Order Time</label>
+                                    <input type="time" class="form-control" formControlName="eveningOrderByTiming">
+                                    <label> Delivery Time</label>
+                                    <input type="time" class="form-control" formControlName="eveningDailyDeliveryTime">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vendor-form bg-white">
+                <div class="this_row " formArrayName="dairyFeatures">
+                    <div class="col-lg-12 p-0">
+                        <div class="upi-detail-head">
+                            <h3> Dairy Feature </h3>
+                            <a class="btn_blue add-butn" (click)="add()" style="color: white !important;"><i
+                                    class="fa fa-plus mr-2" aria-hidden="true"></i> Add</a>
+                        </div>
+                    </div>
+                    <div class="row  py-4 align-items-center" *ngFor="let item of List1().controls;  let i = index;"
+                        [formGroupName]="i">
+                        <div class="col-lg-12 col-md-12">
+                            <label> Title </label>
+                            <input type="text" class="control-form" formControlName="dairyFeatureTitle">
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <label>Feature Description</label>
+                            <textarea class="control-form" formControlName="dairyFeatureDescription">
+                            </textarea>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Image</label><br>
+                            <input name="bannerimage" type="file" class="uploadFile img">
+                        </div>
+                        <div class="col-lg-6 col-md-12 mt-3">
+                            <label class="mr-3">Status</label>
+                            <label class="switch">
+                                <input type="checkbox" formControlName="status" (change)='checkStatus($event)'>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-lg-12">
+                            <a class="trash-butn" (click)="deleteHomeData(item,i)"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form bg-white">
+                <div class="this_row ">
+                    <div class="col-lg-12 p-0">
+                        <div class="upi-detail-head">
+                            <h3>Subscription </h3>
+                        </div>
+                    </div>
+                    <div class="row  py-4 align-items-center" formArrayName="subscriptions">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="d-flex radiocheck">
+                                <div class="form-check"
+                                    *ngFor="let subscriptionControl  of subscriptionControls.controls; let i = index;"
+                                    [formGroupName]="i">
+                                    <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                                        formControlName="status">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ subscriptionControl?.get('subscriptionName')?.value }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form bg-white">
+                <div class="this_row " formArrayName="subscriptionFeatures">
+                    <div class="col-lg-12 p-0">
+                        <div class="upi-detail-head">
+                            <h3> Subscription Feature </h3>
+                            <a class="btn_blue add-butn" (click)="add1()" style="color: white !important;"><i
+                                    class="fa fa-plus mr-2" aria-hidden="true"></i> Add</a>
+                        </div>
+                    </div>
+                    <div class="row  py-4 align-items-center" *ngFor="let item of List2().controls;  let i = index;"
+                        [formGroupName]="i">
+
+                        <div class="col-lg-12 col-md-12">
+                            <label> Title </label>
+                            <input type="text" class="control-form" formControlName="subscriptionFeatureTitle">
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <label>Feature Description</label>
+                            <textarea class="control-form" formControlName="subscriptionFeatureDescription">
+                            </textarea>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Image</label><br>
+                            <input name="bannerimage" type="file" class="uploadFile img">
+                        </div>
+                        <div class="col-lg-6 col-md-12 mt-3">
+                            <label class="mr-3">Status</label>
+                            <label class="switch">
+                                <input type="checkbox" formControlName="status" (change)='checkStatus1($event)'>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-lg-12">
+                            <a class="trash-butn" (click)="deleteSubsData(item,i)"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form bg-white ">
+                <div class="col-lg-12 col-md-12  text-center">
+                    <button class="border-btn" type="submit" data-toggle="modal"
+                        data-target="#cancel-mess">Cancel</button>
+                    <button class="btn_blue " type="submit" (click)="addUpdate()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content warning-content">
+
+            <div class="modal-body text-center warning-mess-sec">
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="assets\img\warning.png">
+                <h2>Alert</h2>
+                <p>Are You Sure, You want to Cancel it?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+                <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+            </div>
+        </div>
+    </div>
+</div>

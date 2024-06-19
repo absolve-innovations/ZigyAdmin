@@ -1,0 +1,130 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2> Membership Plan</h2>
+        </div>
+
+        <div class="vendor-form bg-white mt-30 membership-section">
+            <form [formGroup]="planForm">
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Plan Name</label>
+                            <input type="text" class="control-form" formControlName="planName">
+                            <label *ngIf="submitted && f['planName'].errors" class="invalid-formdata">
+                                Plan Name is required
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Plan Duration</label>
+                            <select type="text" class="control-form" formControlName="planDuration">
+                                <option value="" selected> Choose Plan </option>
+                                <option value="1">Monthly</option>
+                                <option value="2">Quarterly</option>
+                                <option value="3">Semi Annually</option>
+                                <option value="4">Annually</option>
+                            </select>
+                            <label *ngIf="submitted && f['planDuration'].errors" class="invalid-formdata">
+                                Plan Duration is required
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Plan Price</label>
+                            <input type="text" class="control-form" formControlName="planPrice" numbersOnly>
+                            <label *ngIf="submitted && f['planPrice'].errors" class="invalid-formdata">
+                                Plan Price is required
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Discount In Percentage</label>
+                            <input type="text" class="control-form" formControlName="discountInPercentage" numbersOnly>
+                            <!-- <label *ngIf="submitted && f['discountInPercentage'].errors" class="invalid-formdata">
+                               Discount Percentage is required
+                            </label> -->
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>GST Type</label>
+                            <select type="text" formControlName="gsttype" class="control-form">
+                                <option selected>Choose Type</option>
+                                <option selected value="Exclusive">Exclusive</option>
+                            </select>
+                            <!-- <label *ngIf="submitted && f['gsttype'].errors" class="invalid-formdata">
+                               Gst Type is required
+                            </label> -->
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>GST In Percentage</label>
+                            <input type="text" class="control-form" formControlName="gstinPercentage" numbersOnly>
+                            <label *ngIf="submitted && f['gstinPercentage'].errors" class="invalid-formdata">
+                                Gst Percentage is required
+                            </label>
+
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Plan Type </label>
+                            <select type="text" class="control-form" formControlName="planType">
+                                <option value="" selected> Choose Plan </option>
+                                <option value="1">Gerocery</option>
+                                <option value="2">Dairy</option>
+                                <option value="3">Combo</option>
+
+                            </select>
+                            <label *ngIf="submitted && f['planType'].errors" class="invalid-formdata">
+                                Plan Type is required
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="mb-3">Is Popular</label><br>
+                            <label class="switch">
+                                <input type="checkbox" checked="" formControlName="isPopular"
+                                    (change)='checkPopularPlan($event)'>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <!-- <div class="col-lg-12 col-md-12">
+                            <label>Plan Description</label>
+                            <textarea type="text" class="control-form " formControlName="planDescription"></textarea>
+                            <angular-editor formControlName="planDescription" [config]="editorConfig"></angular-editor>
+                        </div> -->
+
+                        <div class="col-lg-12 col-md-12 text-center mt-20">
+                            <button type="submit" class="border-btn" data-toggle="modal"
+                                data-target="#cancel-mess">Cancel</button>
+                            <button type="submit" class="btn_blue" (click)="addUpdatePlan()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content warning-content">
+            <div class="modal-body text-center warning-mess-sec">
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="assets\img\warning.png">
+                <h2>Alert</h2>
+                <p>Are You Sure, You want to Cancel it?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+                <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+            </div>
+        </div>
+    </div>
+</div>

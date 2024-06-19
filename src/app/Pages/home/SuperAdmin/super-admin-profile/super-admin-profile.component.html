@@ -1,0 +1,226 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <form [formGroup]="form">
+            
+                <h2>Profile</h2>
+            <div class="vendor-form bg-white mt-40">
+                <div  class="text-center mb-30">
+                <h3>Update Profile Picture </h3>
+               </div>
+                <div class="this_row">
+                    <div class="row ">
+                        <div class="col-lg-12 col-md-12 mb-40">
+                            <div class="upload_file text-center">
+                                <div class="imges-upload mb-0">
+                                    <div class="imgUp m-auto">
+                                        <div class="imagePreview" [style.background-image]="'url(' + editImages + ')'">
+                                        </div>
+                                        <label class="upload button btn btn-primary">
+                                            Upload<input type="file" class="uploadFile img" name="bannerimage"
+                                                style="width: 0px;height: 0px;overflow: file; border-style: none;"
+                                                id="bannerimage" (change)="imagesUpload($event)">
+                                        </label>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h3>Personal Detail </h3>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>First Name</label>
+                            <input type="text" formControlName="firstName" class="control-form ">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Last Name
+                            </label>
+                            <input type="text" class="control-form " formControlName="lastName">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Email</label>
+                            <input type="email" class="control-form " formControlName="email">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Gender
+                            </label>
+                            <select type="text" class="control-form " formControlName="gender">
+                                <option>Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Country</label>
+                            <select type="text" class="control-form" formControlName="countryId">
+                                <option [selected]="true">India </option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>State</label>
+                            <select type="text" class="control-form" formControlName="stateId">
+                                <option value="" selected>Choose State</option>
+                                <option *ngFor="let app of statesLists" [ngValue]="app?.stateId">{{app?.stateName}}
+                                </option>
+                            </select>
+                            <!-- <label *ngIf="stateId?.invalid && submitted != null && !submitted" class="invalid-formdata">
+                                State is required.
+                            </label> -->
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Dial Code</label>
+                            <input type="text" class="form-control " formControlName="dialCode" OnlyNumbers [readonly]="true" style="background-color: rgb(218, 231, 243);" >
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Phone Number </label>
+                            <input type="text" class="control-form " formControlName="phoneNumber" OnlyNumbers>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <!-- <div class="vendor-form bg-white" formArrayName="bankDetail">
+                <h3> Bank Detail</h3>
+                <div class="this_row">
+                    <div class="row" *ngFor="let item of bankDetail.controls;  let i = index;" [formGroupName]="i">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Bank Name </label>
+                            <input type="text" class="control-form" formControlName="bankName">
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Account Holder Name</label>
+                            <input type="text" class="control-form" formControlName="bankAccountHolderName">
+                        </div>
+
+                        <div class="col-lg-4 col-md-12">
+                            <label>Account Number</label>
+                            <input type="text" class="control-form" numberOnly formControlName="bankAccountNumber">
+                        </div>
+
+                        <div class="col-lg-4 col-md-12">
+                            <label>IFSC Code</label>
+                            <input type="text" class="control-form" formControlName="ifsc">
+                        </div>
+
+                        <div class="col-lg-4 col-md-12">
+                            <label>Branch Name</label>
+                            <input type="text" class="control-form" formControlName="branchName">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="vendor-form bg-white">
+
+                <div class="this_row" formArrayName="upiDetail">
+
+                    <div class="col-lg-12 p-0">
+                        <div class="upi-detail-head">
+                            <h3>UPI Detail</h3>
+                            <a class="btn_blue add-butn m-0" (click)="add()"><i class="fa fa-plus mr-2"
+                                    aria-hidden="true"></i> Add</a>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let item of List1().controls;  let i = index;" [formGroupName]="i">
+                        <div class="col-lg-5 col-md-12">
+                            <label>Bank Name </label>
+                            <input type="text" class="control-form" formControlName="bankName">
+                        </div>
+
+                        <div class="col-lg-5 col-md-12">
+                            <label>Account Holder Name</label>
+                            <input type="text" class="control-form" formControlName="accountHolderName">
+                        </div>
+                        <div class="col-lg-2">
+                            <a class="trash-butn" (click)="deleteHomeData(item,i)"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12">
+                            <label>UPI Id </label>
+                            <input type="text" class="control-form" numberOnly formControlName="upiid">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>QR Image</label><br>
+                   
+                            <label data-toggle="modal" data-target="#vendorpreview" class="preview-butn">preview</label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mt-3">
+                            <label class="mr-3">Status</label>
+                            <label class="switch">
+                                <input type="checkbox" formControlName="isActive" (change)='checkStatus($event)'>
+                                >
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div> -->
+            <div class="vendor-form bg-white ">
+                <div class="col-lg-12 col-md-12  text-center">
+                    <button class="border-btn" type="submit" value="" data-toggle="modal" data-target="#cancel-mess">Cancel</button>
+                    <button class="btn_blue " type="submit" value="" (click)="postSuperAdmimProfile()" >Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- modal3 -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content popup_advance">
+            <button type="button" class="close" data-dismiss="modals" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <div class="imagePreview vendor-preview">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="vendorpreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content popup_advance">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <div class="imagePreview vendor-preview">
+                    <img class="image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal For cancel Button-->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content warning-content">
+        
+        <div class="modal-body text-center warning-mess-sec">
+            <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <img src="assets\img\warning.png">
+            <h2>Alert</h2>
+          <p>Are You Sure, You want to Cancel it?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+          <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

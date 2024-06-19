@@ -1,0 +1,322 @@
+<div class="app-main__outer">
+  <div class="admin_a">
+    <div class="top-head">
+      <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+      <h2>Product form</h2>
+    </div>
+    <form [formGroup]="form">
+
+      <div class="vendor-form mt-40 bg-white"  >
+        <div class="text-center mb-30">
+          <h3>Product Photos</h3>
+        </div>
+        <!-- Title Here -->
+        <div class="col-lg-12 col-md-12 mb-20">
+          <div class="upload_file text-center">
+            <div class="imges-upload mb-0">
+              <div class="imgUp m-auto">
+                <div class="imagePreview" style="background-image: url(&quot;undefined&quot;);">
+                </div>
+                    <label class="upload button btn btn-primary">
+                      Upload<input type="file" class="uploadFile img" name="bannerimage"
+                        style="width: 0px;height: 0px;overflow: file; border-style: none;" id="bannerimage"
+                        (change)="onselect($event)" multiple />
+                    </label>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+              <div class="col-lg-6 mx-auto mb-30">
+              <div class="multi-img-box">
+                <div  *ngFor="let url of urls; let i = index">
+                  <div class="multiple-images multiple-img-sec ">
+                    <img class="img-responsive" [src]="url" />
+                    <button class="remove" (click)="removeImage(i)">X</button>
+                  </div>
+                </div>
+              </div>
+              </div>
+        <h3>Price, Stock and Shipping Information</h3>
+        <!-- Title Here -->
+        <div class="this_row">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <label>In Stock <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <input type="text" numbersOnly class="control-form" formControlName="inStock" OnlyNumbers />
+              <label *ngIf="submitted && f['inStock'].errors" class="invalid-formdata">
+                In Stock is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>MRP <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <input type="text"  class="control-form" formControlName="mrp" numbersOnly [(ngModel)]="mrp" (input)="calculateSellingPrice()"/>
+              <label *ngIf="submitted && f['mrp'].errors" class="invalid-formdata">
+                MRP is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Discount Type </label>
+              <select type="text" class="control-form" formControlName="discountType" [(ngModel)]="discountType" (change)="calculateSellingPrice()" >
+                <option value="1" [selected]="discountType === '1'">Flat</option>
+                <option  value="0" >Percentage</option>
+              </select>
+              <!-- <label *ngIf="submitted && f['discountType'].errors" class="invalid-formdata">
+                              Discount Type is required
+                            </label> -->
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Discount </label>
+              <input type="text" class="control-form" formControlName="discount" numbersOnly [(ngModel)]="discount" (input)="calculateSellingPrice()" (input)="resetDiscount()"
+                [disabled]="discountType === '1' && (discount > mrp || discount > maxDiscountValue)" (keypress)="onDiscountKeypress($event)" />
+            </div>
+            
+
+            <div class="col-lg-4 col-md-12">
+              <label>Selling Price <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <input type="text"  class="control-form white-bg"  formControlName="sellingPrice" [(ngModel)]="sellingPrice" [readonly]="true"/>
+              <label *ngIf="submitted && f['sellingPrice'].errors" class="invalid-formdata">
+                Selling Price is required
+              </label>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+              <label>Manufacturing Date </label>
+              <!-- <input type="text" class="control-form" formControlName="manufacturingDate"> -->
+              <input type="text" formControlName="manufacturingDate" class="form-control "   style="background-color: #fff;" bsDatepicker
+                [maxDate]="today"    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [readonly]="true" />
+                
+              <!-- <label *ngIf="submitted && f['manufacturingDate'].errors" class="invalid-formdata">
+                              Manufacturing Date is required
+                            </label> -->
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+              <label>Expiry Date </label>
+              <!-- <input type="text" class="control-form" formControlName="expiryDate"> -->
+              <input type="text" formControlName="expiryDate" class="form-control"   style="background-color: #fff;" bsDatepicker
+              [minDate]="today"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [readonly]="true" />
+              <!-- <label *ngIf="submitted && f['expiryDate'].errors" class="invalid-formdata">
+                          Expiry Date is required
+                        </label> -->
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Quantity <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <input type="text"  class="control-form" formControlName="quantity" numbersOnly/>
+              <label *ngIf="submitted && f['quantity'].errors" class="invalid-formdata">
+                Quantity is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Quantity Type <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <select type="text" class="control-form" formControlName="productQuantityTypeId">
+                <option value="">Select Quantity</option>
+                <option *ngFor="let item of qunatityList" [ngValue]="item?.productQuantityTypeId">
+                  {{item?.quantityTypeName}}
+                </option>
+              </select>
+              <label *ngIf="submitted && f['inStock'].errors" class="invalid-formdata">
+                Product Quantity Type is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Container Type <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <select type="text" class="control-form" formControlName="productContainerTypeId">
+                <option value="">Select Type</option>
+                <option *ngFor="let item of containerList" [ngValue]="item?.productContainerTypeId">
+                  {{item?.productContainerTypeName}}
+                </option>
+              </select>
+              <label *ngIf="submitted && f['productContainerTypeId'].errors" class="invalid-formdata">
+                Product Container Type is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Shipping Charges </label>
+              <input type="text"  class="control-form" formControlName="shippingCharges" numbersOnly/>
+              <!-- <label *ngIf="submitted && f['shippingCharges'].errors" class="invalid-formdata">
+                              Shipping Charges is required
+                            </label> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end first form -->
+      <div class="vendor-form" style="background:#fff;">
+        <h3>Product Detail</h3>
+        <!-- Title Here -->
+        <div class="this_row">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <label>Product Name <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <input type="text" class="control-form" formControlName="productName" noSpacesAtStart/>
+              <label *ngIf="submitted && f['productName'].errors" class="invalid-formdata">
+                Product Name is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>SKU Id <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <input type="text" class="control-form" formControlName="skuid" noSpacesAtStart alphanumericOnly />
+              <label *ngIf="submitted && f['skuid'].errors?.['required']" class="invalid-formdata">
+                Sku Id is required
+              </label>
+              <label *ngIf="submitted && f['skuid'].errors?.['pattern']" class="invalid-formdata">
+                Please enter valid Sku Id
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Brand </label>
+              <select type="text" class="control-form" formControlName="brandId">
+                <option value="">Select Brand</option>
+                <option *ngFor="let item of brandList" [ngValue]="item.brandId">
+                  {{item?.brandName}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Main Category <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <select type="text" class="control-form" formControlName="mainProductCategoryId"
+                (change)="getSubcategoryList(f['mainProductCategoryId'].value)">
+                <option value="" >Select</option>
+                <option *ngFor="let item of maincategoryList" [ngValue]="item.mainProductCategoryId">
+                  {{item?.categoryName}}
+                </option>
+              </select>
+              <label *ngIf="submitted && f['mainProductCategoryId'].errors" class="invalid-formdata">
+                Main Product Category is required
+              </label>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Sub Category</label>
+              <select type="text" class="control-form" formControlName="subProductCategoryId"
+                (change)="getSubSubcategoryList(f['subProductCategoryId'].value)">
+                <option value="" >Select</option>
+                <option *ngFor="let item of SubcategoryList" [ngValue]="item.subProductCategoryId">
+                  {{item?.categoryName}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Sub Sub Category</label>
+              <select type="text" class="control-form" formControlName="subSubProductCategoryId">
+                <option value="" >Select</option>
+                <option *ngFor="let item of SubSubcategoryList" [ngValue]="item?.subSubProductCategoryId">
+                  {{item?.categoryName}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Group Id</label>
+              <input type="text" OnlyNumbers class="control-form" formControlName="groupId" />
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Waiting Days</label>
+              <input type="text" OnlyNumbers class="control-form" formControlName="waitingDays" />
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Speciality </label>
+              <select type="text" class="control-form" formControlName="speciality">
+                <option value="1">Veg</option>
+                <option value="2">NonVeg</option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label>Flavour</label>
+              <input type="text" class="control-form" formControlName="flavour" noSpacesAtStart/>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <label>Product Description</label>
+              <textarea type="text" class="control-form" formControlName="productDescription" noSpacesAtStart></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end first form -->
+
+      <div class="vendor-form" style="background:#fff;">
+        <h3>Additional Description (Optional)</h3>
+        <!-- Title Here -->
+
+        <div class="this_row">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <label>Ingredients</label>
+              <textarea class="control-form" formControlName="ingredients" noSpacesAtStart>
+                </textarea>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <label>How To Use</label>
+              <textarea class="control-form" formControlName="howToUse" noSpacesAtStart>
+                </textarea>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <label>Storage And Uses</label>
+              <textarea class="control-form" formControlName="storageAndUses" noSpacesAtStart>
+                </textarea>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <label>Nutrition Fact</label>
+              <textarea class="control-form" formControlName="nutritionFact" noSpacesAtStart>
+                </textarea>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <label>Other Product Info </label>
+              <textarea class="control-form" formControlName="otherProductInfo" noSpacesAtStart>
+                </textarea>
+            </div>
+
+            <div class="col-lg-12 col-md-12 mt-40 text-center">
+              <button class="border-btn" type="submit" value="" data-toggle="modal" data-target="#cancel-mess">Cancel</button>
+              <button class="btn_blue" type="submit" (click)="submit()">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end first form -->
+    </form>
+  </div>
+</div>
+ <!-- Modal -->
+ <div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content warning-content">
+      
+      <div class="modal-body text-center warning-mess-sec">
+          <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <img src="assets\img\warning.png">
+          <h2>Alert</h2>
+        <p>Are You Sure, You want to Cancel it?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+        <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="app-main__outer">
+
+    <div class="admin_a form_dashbord">
+
+        <div class="d-flex if_xs_btn mt-30 mb-30">
+            <input type="text" placeholder="Search Here" class="btn_border search_here" [(ngModel)]="searchText"
+                (click)="performSearch()" (input)="addSpaceAfterText()" (click)="onSearch(search)">
+        </div>
+        <div class="table-responsive">
+            <form [formGroup]="form">
+                <table class="table admin_table">
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Phone No.</th>
+                        <th>Address</th>
+                        <th>Subscription Type</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr
+                        *ngFor="let item of SubscriptionList  | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' } ">
+
+                        <td class="profile checkbox-td"> {{item?.customerFirstName}} {{item?.customerLastName}}</td>
+                        <td>{{item?.phoneNumber}}</td>
+                        <td> {{item?.streetAddress}}</td>
+                        <td>{{item?.subscriptionType}}</td>
+                        <td>
+                            <a [routerLink]="['/vendor/setting/subscription-list/detail/',item.subscriptionDetailId ] "><i
+                                    class="fa fa-eye"></i></a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div class="no-data text-center" *ngIf="SubscriptionList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+        </div>
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page" class="paginate-doctor-list"
+            queryParamsHandling="merge" (pageChange)="refresh()">
+        </pagination-controls>
+
+    </div>
+</div>

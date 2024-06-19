@@ -1,0 +1,210 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <form [formGroup]="form">
+            <div class="text-center">
+                <h2>Add Collection </h2>
+            </div>
+            <div class="vendor-form mt-30 white-bg">
+                <div class="col-lg-12 col-md-12 mb-40">
+                    <div class="upload_file text-center">
+                        <div class="imges-upload mb-0 ">
+                            <div class="new-imagesupload m-auto d-flex flex-wrap multi_itemsprev">
+
+
+                                <div *ngFor="let url of urls; let i = index">
+                                    <div class="">
+                                        <img class="img-responsive" [src]="url">
+                                        <button class="remove" (click)="removeImage(i)">X</button>
+                                    </div>
+                                </div>
+
+                                <!-- {{imageFile}}/ -->
+                            </div>
+                            <label class="upload button btn btn-primary">
+                                Upload<input type="file" class="uploadFile img" name="bannerimage"
+                                    style="width: 0px;height: 0px;overflow: file; border-style: none;" id="bannerimage"
+                                    (change)="onselect($event)" multiple>
+                            </label>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-5 col-md-12">
+                        <label>Choose Collections</label>
+                        <select type="text" class="control-form" formControlName="collectionInfoId">
+                            <option selected>Select</option>
+                            <option *ngFor="let item of collectionNameList" [ngValue]="item?.collectionInfoId">
+                                {{item?.collectionName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="or-back">
+                            <div class="or-option">
+                                <p>Or</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12">
+                        <label>Add New Collection Name</label>
+                        <input type="text" formcontrolname="collectionName" class="control-form "
+                            placeholder="New Collection">
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <label>Choose Category</label>
+                        <select type="text" formControlName="mainProductCategoryId" class="control-form"
+                            (change)="getFilterMainCategoryList(f['mainProductCategoryId'].value)"
+                            (change)="getSubcategoryList(f['mainProductCategoryId'].value)">
+                            <option value="" selected>Select </option>
+                            <option *ngFor="let item of maincategoryList" [ngValue]="item.mainProductCategoryId">
+                                {{item?.categoryName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label>Choose Sub Category</label>
+                        <select type="text" formControlName="subProductCategoryId" class="control-form"
+                            (change)="getFilterSubCategoryList(f['subProductCategoryId'].value)"
+                            (change)="getSubSubcategoryList(f['subProductCategoryId'].value)">
+                            <option selected>Select</option>
+                            <option *ngFor="let item of SubcategoryList" [ngValue]="item?.subProductCategoryId">
+                                {{item?.categoryName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label>Choose Sub-SubCategory</label>
+                        <select type="text" formcontrolname="subSubProductCategoryId" class="control-form"
+                            (change)="getFilterSubSubCategoryList(f['subSubProductCategoryId'].value)">
+                            <option selected>Select</option>
+                            <option *ngFor="let item of SubSubcategoryList" [ngValue]="item?.subSubProductCategoryId">
+                                {{item?.categoryName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label>SKU Id </label>
+                        <input type="text" class="control-form" formControlName="skuid">
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12">
+                        <div class="dropdown-scroll">
+                            <label>Choose Product </label>
+                            <!-- <select type="text" formcontrolname="discountType" class="control-form">
+                            <option  selected>Select</option>
+                            <option *ngFor="let item of productList">{{item.productName}}</option>
+                        </select> -->
+                        <ng-multiselect-dropdown   [(ngModel)]="selectedItems" [settings]="dropdownSettings" [data]="bindproductList"
+                        formControlName="productIds" (onDeSelect)="onItemSelect($event)" 
+                        (onSelectAll)="onSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                    </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-12" >
+                        <label>In Stock</label><br>
+                        <input type="text" OnlyNumbers 
+                        formControlName="inStock" class="control-form">
+                    </div>
+                </div>
+
+                <!-- <div class="col-lg-4 col-md-6 col-sm-6">
+                        <form>
+                            <div class="form-group form-check p-none">
+                                <label>Product Quantity</label>
+                                <input type="text" formcontrolname="categoryName" ng-reflect-name="categoryName"
+                                    class="control-form ng-pristine ng-invalid ng-touched">
+                            </div>
+                        </form>
+                    </div> -->
+                <!-- <div class="col-lg-4 col-md-6 col-sm-6 align-middle">
+                            <button type="button" class="btn_blue collection-butn " (click)="addToNestedArray()"><i
+                                    class="fa fa-plus" aria-hidden="true"></i> Add to
+                                Collection</button>
+                        </div> -->
+
+                <!-- <div class="col-lg-12 mb-20">
+                        <div class="collection-table admin_table table-responsive">
+                            <table class="table" formArrayName="collectionProducts">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of nestedArray let i = index;">
+                                    <td>{{item.item_text}}</td>
+                                    <td><input type="text" formControlName="productCount" value="2"></td>
+                                    <td>
+                                        <a href="#">
+                                            <i class="fa fa-info-circle" aria-hidden="true" style="background: #3270b8; color: #fff; padding: 6px; border-radius: 5px; font-size: 14px;"></i>
+                                        </a>
+                                        <a (click)="removeList()">
+                                            <i  class="fa fa-times" style="background: #9f0a2a; color: #fff; padding: 6px; border-radius: 5px; font-size: 14px;"></i>
+                                        </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div> -->
+                <div class="row mt-3">
+                    <div class="col-lg-3">
+                        <label>MRP</label>
+                        <input type="text" numbersOnly
+                        formControlName="mrp" class="control-form ">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Discount Type</label>
+                        <select type="text" formControlName="discountType" class="control-form">
+                            <option selected>Select</option>
+                            <option value="0">Percentage</option>
+                            <option value="0">Flat</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Discount</label>
+                        <input type="text" numbersOnly
+                        formControlName="discount" class="control-form ">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Selling Price</label>
+                        <input type="text" numbersOnly
+                        class="control-form ">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-lg-12 col-md-12 ">
+                        <label>Collection Description</label><br>
+                        <div class="form-floating">
+                            <textarea class="form-control"  formControlName="collectionDescription" 
+                                style="height: 100px"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 mt-3">
+                        <label class="mr-2">Featured</label>
+                        <label class="switch">
+                            <input type="checkbox" (click)="checkInactiveStatus()">
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 mt-10 text-center">
+                        <button type="submit" class="btn_blue" (click)="submit()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

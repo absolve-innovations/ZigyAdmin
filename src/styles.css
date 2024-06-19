@@ -1,0 +1,18 @@
+.invalid-formdata {
+    color: red;
+}
+
+.theme-green  .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td.selected span, .theme-green .bs-datepicker-body table td span[class*=select-]:after, .theme-green .bs-datepicker-body table td[class*=select-] span:after {
+    background-color: #002c6f !important;
+  }
+  .theme-green .bs-datepicker-body table td.week span {
+    color: #002c6f;
+  }
+
+  .bs-datepicker-body table td.week span {
+    color: #002c6f!important;
+  }
+
+  .theme-green .bs-datepicker-head {
+    background-color: #002c6f!important;
+}

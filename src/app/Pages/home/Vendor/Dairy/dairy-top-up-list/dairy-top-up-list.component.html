@@ -1,0 +1,80 @@
+<div class="app-main__outer">
+    <!-- <div class="app-main__inner">		 -->
+
+
+
+    <div class="admin_a form_dashbord">
+
+        <!-- <div class="text-center d-table">
+            <img src="https://dummyimage.com/100x100/ddd/fff" class="img-responsive rounded-circle">
+            <h3>James Walter</h3>
+        </div> -->
+
+        <div class="d-flex if_xs_btn mt-30 mb-30">
+            <input type="text" placeholder="Search Here" class="btn_border search_here" [(ngModel)]="searchText" (click)="performSearch()" (input)="addSpaceAfterText()" (click)="onSearch(search)">
+
+            <!-- <a [routerLink]="['/user-admin-lis']" class="btn_blue ml-auto">Add Admin User</a> -->
+        </div>
+
+        <div class="table-responsive">
+            <form [formGroup]="form">
+                <table class="table admin_table">
+
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Top Up</th>
+                        <th>Receipt Image</th>
+                        <th>Payment Status</th>
+                    </tr>
+
+
+
+                    <tr
+                        *ngFor="let item of topUpList  | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' } ">
+
+                        <td>
+                            {{item?.customerName}}
+                        </td>
+                        <!-- <td class="profile"> <img class="img-responsive" [src]="rootUrl + item?.profilepic"></td> -->
+                        <td>{{item?.createDate}}</td>
+                        <td>{{item?.topUpAmount}} </td>
+                        <td class="profile"><img [src]="rootUrl + item?.paymentReceiptImage" class="img-responsive"></td>
+                        <!-- <td *ngIf='!item.isEdit'> {{item?.areaCodeId}} </td>
+                        <td *ngIf='item.isEdit'>
+                            <div class="form-group  td-inputtext">
+                                <input type="text" class="form-control" [value]="item?.areaCodeId"
+                                    formControlName="areaCodeId" appAutofocus>
+                                <span><a (click)="setCustomerAreaCode()">Save</a></span>
+                            </div>
+                        </td> -->
+                        <!-- <td>
+                            <a [routerLink]="['/vendor/setting/customer-detail/',item.customerUserId ] "><i
+                                    class="fa fa-eye"></i></a>
+                        </td> -->
+                        <td class="td-dropdown"> 
+                            <select type="text" class="control-form btn_border" formControlName="paymentStatus"  (change)="postDairyWalletStatus(item)">
+                                <option value="" selected>{{item?.paymentStatus}} </option>
+                                <option value="Paid" *ngIf="item?.paymentStatus !== 'Paid'">Paid </option>
+                                <option value="OnHold" *ngIf="item?.paymentStatus !== 'OnHold'">On Hold</option>
+                                <option value="Refunded" *ngIf="item?.paymentStatus !== 'Refund'">Refund </option>
+                                <option value="Unpaid" *ngIf="item?.paymentStatus !== 'Unpaid'">Unpaid</option>
+
+                              </select>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+            <div class="no-data text-center" *ngIf="topUpList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+
+        </div>
+
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page"
+        class="paginate-doctor-list" queryParamsHandling="merge" (pageChange)="refresh()">
+    </pagination-controls>
+
+    </div>
+</div>

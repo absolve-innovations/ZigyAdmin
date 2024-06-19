@@ -1,0 +1,52 @@
+<div class="app-main__outer">
+		
+				<div  class="admin_a form_dashbord">	
+
+                    <div class="top-head">
+                        <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+                        <h2>Delivery Man Detail</h2>
+                      </div>
+<!--       
+        <div class="vendor-form image-back mt-40 bg-white" >
+
+            <img class="image" [src]="rootUrl + detail?.profilePic">
+
+        </div> -->
+
+        <div class="vendor-form mt-40 bg-white" >
+
+            <div class="this_row">
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Delivery Man Name:</dt>
+                            <dd>{{deliveryManDetail?.deliveryManName}}</dd>
+                        </dl>
+
+
+                        <dl class="d-flex inform_text">
+                            <dt>Delivery Man PhoneNumber:</dt>
+                            <dd>{{deliveryManDetail?.deliveryManPhoneNumber}}</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Area Code:</dt>
+                            <dd>{{deliveryManDetail?.areaCodeId}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Delivery Man Whatsapp Number :</dt>
+                            <dd>{{deliveryManDetail?.deliveryManWhatsappNumber}}</dd>
+                        </dl>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

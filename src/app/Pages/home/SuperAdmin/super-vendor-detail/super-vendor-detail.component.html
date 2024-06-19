@@ -1,0 +1,350 @@
+<div class="app-main__outer">
+    <div class="admin_a form_dashbord">
+        <div class="d-flex flex-wrap if_xs_btn mt-30 v-detail">
+            <div class="top-head">
+                <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+                <h2>Vendor Detail</h2>
+            </div>
+
+            <a (click)="passId(vendorDetail)" class="btn_blue ml-auto mtinsm-10"
+                style="color: white !important;">Products</a>
+        </div>
+        <div class="vendor-form d-flex align-items-center justify-content-center mt-40" style=" padding-bottom:60px;">
+            <div class="col-lg-6">
+                <div class="image-back bg-white ">
+
+                    <img class="image" [src]="rootUrl + vendorDetail?.profilePic" style="max-width: 450px;">
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="qr-body" data-toggle="modal" data-target="#myModal">
+                    <qrcode #parent [qrdata]="stringQrCode" [width]="250" [errorCorrectionLevel]="'M'"
+                        style="margin: 0 auto;"> </qrcode>
+                    <span class="text-center">Click Me</span>
+                </div>
+            </div>
+        </div>
+        <div class="vendor-form mt-40 bg-white pb-60">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>First Name:</dt>
+                            <dd>{{vendorDetail?.firstName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Email:</dt>
+                            <dd>{{vendorDetail?.email}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Country:</dt>
+                            <dd>{{vendorDetail?.countryName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Phone Number:</dt>
+                            <dd>{{vendorDetail?.dialCode}} {{vendorDetail?.phoneNumber}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Last Name:</dt>
+                            <dd>{{vendorDetail?.lastName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Gender:</dt>
+                            <dd>{{vendorDetail?.gender}}</dd>
+                        </dl>
+
+
+                        <dl class="d-flex inform_text">
+                            <dt>State:</dt>
+                            <dd>{{vendorDetail?.stateName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Created By Name:</dt>
+                            <dd>{{vendorDetail?.createdByName}}</dd>
+                        </dl>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end first form -->
+        <div class="vendor-form mt-30 bg-white pb-60">
+            <h3>Shop</h3><!-- Title Here -->
+            <div class="this_row">
+                <div class="row" *ngFor="let item of vendorDetail?.shopResponses">
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Shop Name:</dt>
+                            <dd>{{item?.shopName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Gst Number:</dt>
+                            <dd>{{item?.gstnumber}}</dd>
+                        </dl>
+
+
+                        <dl class="d-flex inform_text">
+                            <dt>City:</dt>
+                            <dd>{{item?.city}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Shop Image:</dt>
+                            <dd><a href="" data-toggle="modal" data-target="#myModal2">Preview</a></dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Status Display:</dt>
+                            <dd>{{item?.statusDisplay}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Business Pan:</dt>
+                            <dd>{{item?.businessPAN}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Landmark:</dt>
+                            <dd>{{item?.landmark}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Zip:</dt>
+                            <dd>{{item?.zip}}</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Shop Address:</dt>
+                            <dd>{{item?.shopAddress}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Shop Description:</dt>
+                            <dd>{{item?.shopDescription}}</dd>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end first form -->
+
+        <!-- <div class="vendor-form mt-30" style="background:#fff; padding-bottom:60px;">
+
+            <h3>Bank</h3>
+
+            <div class="this_row">
+                <div class="row" *ngFor="let item of vendorDetail?.bankResponses">
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Bank Account Holder Name:</dt>
+                            <dd>{{item?.bankAccountHolderName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Bank Name:</dt>
+                            <dd>{{item?.bankName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Branch Name:</dt>
+                            <dd>{{item?.branchName}}</dd>
+                        </dl>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Bank Account Number:</dt>
+                            <dd>{{item?.bankAccountNumber}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>IFSC:</dt>
+                            <dd>{{item?.ifsc}}</dd>
+                        </dl>
+
+                    </div>
+
+                </div>
+            </div>
+
+   /
+
+            <h3 class="mt-40">UPI Detail</h3>
+            <div class="col-lg-12 p-0">
+                <div class="table-responsive mt-20">
+                    <table class="table admin_table  product-detail-table">
+                        <tr>
+                            <th>QR Image</th>
+                            <th>Account Holder Name</th>
+                            <th>Bank Name</th>
+                            <th>UPI Id</th>
+                            <th>Status</th>
+                             
+                        </tr>
+                        <tr *ngFor="let item of upiDetail; let i =index">
+                            <td class="profile">
+                                <a href="#" data-toggle="modal" data-target="#myModalQR">
+                                    <img class="img-responsive scale-hover-img" [src]="rootUrl + item?.qrcode" data-toggle="tooltip" data-placement="left" title="Preview">
+                                </a>
+                            </td>
+                            <td>{{item?.accountHolderName}}</td>
+                            <td>{{item?.bankName}} </td>
+                            <td>{{item.upiid}}</td>
+                            <td>{{item?.isActive}} </td>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+    </div> -->
+
+        <div class="vendor-form  bg-white mt-30">
+            <h3>Membership Responses</h3><!-- Title Here -->
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Plan Name:</dt>
+                            <dd>{{member?.planName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Create Date:</dt>
+                            <dd>{{member?.createDate}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Plan Status:</dt>
+                            <dd>{{member?.planStatus}}</dd>
+                        </dl>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Price:</dt>
+                            <dd>{{member?.price}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Expiry Date:</dt>
+                            <dd>{{member?.expiryDate}}</dd>
+                        </dl>
+
+                        <!-- <dl class="d-flex inform_text">
+                        <dt>Payment Receipt Image:</dt>
+                        <dd><a href="" data-toggle="modal" data-target="#payment-reciept">Preview</a></dd>
+                    </dl> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog max_sf  modal-dialog-centered" role="document"
+            style="border-radius:15px; overflow:hidden; border:none;">
+            <div class="modal-content popup_advance pb-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body text-center " #htmlElement #htmlContainer>
+                    <img src="assets/img/logo.png" class="zigypopup-logo">
+                    <hr>
+                    <div class="mt-10" *ngFor="let item of vendorDetail?.shopResponses">
+                        <h5>{{item?.shopName}}</h5>
+                        <h5 class="m-0">{{vendorDetail?.phoneNumber}}</h5>
+                    </div>
+                    <qrcode #parent [qrdata]="stringQrCode" [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
+
+                    <div class=" mb-10">
+                        <h5>Scan QR code to add shop</h5>
+                    </div>
+                    <h3> <a href="">www.zigykart.com</a> </h3>
+                </div>
+                <div class="d-flex justify-content-center mt-10 pt-0 pb-4">
+                    <a (click)="downloadDesign()" class="btn  down-sharebtn btn-sm mr-10"><i class="fa fa-download mr-2"
+                            aria-hidden="true"></i>Download</a>
+                    <a (click)="shareViaWhatsApp()" type="button" class="btn down-sharebtn btn-sm"><i
+                            class="fa fa-share-alt mr-2" aria-hidden="true"></i> Share</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+            style="border-radius:15px; overflow:hidden; border:none;">
+            <div class="modal-content popup_advance">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body text-center">
+                    <div class="imagePreview vendor-preview">
+                        <img class="image" [src]="rootUrl + shopDetail">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="modal fade" id="myModalQR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content popup_advance">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <div class="imagePreview vendor-preview">
+                    <img class="image" [src]="rootUrl + upiDetail[0]?.qrcode">
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+    <div class="modal fade" id="payment-reciept" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+            style="border-radius:15px; overflow:hidden; border:none;">
+            <div class="modal-content popup_advance">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body text-center">
+                    <div class="imagePreview vendor-preview">
+                        <img class="image" [src]="rootUrl + member?.paymentReceiptImage">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

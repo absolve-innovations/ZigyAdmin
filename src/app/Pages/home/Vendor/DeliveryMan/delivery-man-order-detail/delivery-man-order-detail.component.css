@@ -1,0 +1,89 @@
+  /* table.fold-table tr.view.open {
+      background: tomato;
+      color: white;
+  }
+
+  table.fold-table tr.view td:first-child, table.fold-table tr.view th:first-child {
+    position: relative;
+  }
+
+  table.fold-table tr.view td, table.fold-table tr.view th {
+      cursor: pointer;
+  }
+
+  table.fold-table tr.fold {
+      display: none;
+  }
+
+  table.fold-table tr.fold.open {
+      display: table-row;
+  }
+
+  .table-tabs tr th{
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .table-tabs tr td{
+    padding: 0px;
+  } */
+
+
+
+  .my-rule th{
+    background: #002C6F;
+    color: #fff;
+    font-weight: 400;
+}
+
+.my-rule tr.view{
+    background: #d5d2d2;
+    position: relative;
+    font-weight: 600;
+}
+.my-rule tr.view:after {
+  content: "\f107"; /* FontAwesome down arrow icon */
+  font-family: 'FontAwesome';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 21px;
+  color: #002c6f;
+  width: 30px;
+  height: 30px;
+  line-height: 27px;
+  border: 1px solid #002c6f;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.my-rule tr.fold{
+    background: #e9e9e9;
+}
+.my-rule tr.fold td.fold-parents{
+    padding: 25px;
+}
+.my-rule tr.fold table td{
+    padding: 5px 15px;
+}
+
+
+
+.my-rule tr table th {
+  background: #72727261 !important;
+  padding: 6px 15px;
+}
+
+.additional input {
+ 
+    margin-right: 10px;
+    width: 65px;
+    padding: 8px;
+    height: 25px;
+    text-align: center;
+    border-radius: 0.25rem;
+    margin-bottom: 0;
+}
+
+

@@ -1,0 +1,26 @@
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background: #002C6F;
+    color: #fff;
+}
+
+img.un-active {
+    display: none;
+}
+.nav-link.active .un-active {
+    display: inline-block;
+}
+
+.nav-link.active .image-active{
+    background: #002C6F;
+    color: #fff;
+}
+
+#nav ul.sub-nav {
+    display: none;
+}
+
+#nav ul.visible {
+    display: block;
+}

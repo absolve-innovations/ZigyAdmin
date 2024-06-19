@@ -1,0 +1,82 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Sub Categories </h2>
+        </div>
+
+        <div class="d-flex if_xs_btn mt-30">
+            <input type="text" placeholder="Search Here" class="btn_border search_here" [(ngModel)]="searchText">
+            <a [routerLink]="['/category-list/sub-category/Sub-add/',  Id]" class="btn_blue ml-auto">Add Sub
+                Category</a>
+        </div>
+
+        <div class="table-responsive mt-40">
+            <table class="table admin_table">
+                <tr>
+                    <th>Sub Category Name</th>
+                    <th>Sub Category Image</th>
+                    <th>Date</th>
+                    <th *ngIf="login == 'Vendor'">Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr
+                    *ngFor="let item of categoryList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' } ">
+                    <td>{{item?.categoryName}}</td>
+                    <td class="profile"><img [src]="rootUrl + item?.categoryImage" class="img-responsive"></td>
+                    <td>{{item?.createDate}}</td>
+                    <td *ngIf="login == 'Vendor'">
+                        <label class="switch" *ngIf="item?.status == true">
+                            <input type="checkbox" checked (click)="checkActiveStatus(item?.subProductCategoryId)">
+                            <span class="slider round"></span>
+                        </label>
+                        <label class="switch" *ngIf="item?.status == false">
+                            <input type="checkbox" (click)="checkInactiveStatus(item?.subProductCategoryId)">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <a *ngIf="item.isNext == true"
+                            [routerLink]="['/category-list/sub-sub-category/'] + item?.subProductCategoryId "><i
+                                class="fa fa-eye"></i></a>
+                        <a *ngIf="item.isNext == false"
+                            [routerLink]="['/category-list/sub-sub-category-add/'] + item?.subProductCategoryId"><i
+                                class="fa fa-plus"></i></a>
+                        <a *ngIf="login == 'SuperAdmin'  && 'Admin' "
+                            [routerLink]="['/category-list/sub-category/Sub-add-edit/',  item?.subProductCategoryId, item.mainProductCategoryId]">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a *ngIf="login == 'SuperAdmin' && 'Admin'" data-toggle="modal" data-target="#list-cross-mess"
+                            (click)="delet(item)">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+
+                    <div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog"
+                        aria-labelledby="cancel-messLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content warning-content">
+                                <div class="modal-body text-center warning-mess-sec">
+                                    <button type="button" class="close float-right" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <img src="assets\img\warning.png">
+                                    <h2>Alert</h2>
+                                    <p>Are You Sure, You want to Delete it?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class=" border-btn" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class=" btn_blue" (click)="deleteSubCategory()">Yes, Delete
+                                        It</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </table>
+        </div>
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page" class="paginate-doctor-list">
+        </pagination-controls>
+    </div>
+</div>

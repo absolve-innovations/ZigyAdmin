@@ -1,0 +1,245 @@
+
+<!--<div class="sidebar_fiX  xs-sm-order-2" id="menu" style="background:#fff;">
+
+    <ul class="sidebar_menu mobile-menu-holder" *ngFor="let route of routes">
+        <li class="nav-item">
+            <a  routerLinkActive="active" class="nav-link"  #rla="routerLinkActive" *ngIf="!route?.sub" [routerLink]="'/' + route.routerLink">
+              <span  class="image-active">  {{route.name}}</span>
+            </a>
+        </li>
+    </ul>
+</div>-->
+
+<div class="app-sidebar sidebar-shadow">
+
+    <div class="app-header__logo">
+       <div class="logo-src"></div>
+       <div class="header__pane ml-auto">
+           <div>
+               <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                   data-class="closed-sidebar">
+                   <span class="hamburger-box">
+                       <span class="hamburger-inner"></span>
+                   </span>
+               </button>
+           </div>
+       </div>
+   </div>
+   <div class="app-header__mobile-menu">
+       <div>
+           <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav" >
+               <span class="hamburger-box">
+                   <span class="hamburger-inner"></span>
+               </span>
+           </button>
+       </div>
+   </div>
+
+ <div class="scrollbar-sidebar">
+     <div class="app-sidebar__inner">
+        <ng-container>
+            <ul class="vertical-nav-menu nav-pills">
+            <li class="nav-item nav-pills parent"  *ngFor="let route of routes" >
+                <a routerLinkActive="mm-active" #rla="routerLinkActive" [routerLink]="'/' + route.routerLink" *ngIf="!route?.sub">
+                 <span>{{route.name}}</span>
+                </a>
+                <!-- <ul class="sub-nav">
+                    <li *ngFor="let r of route.subRoutes"  class="parent">
+                        <a routerLinkActive="mm-active" #rla="routerLinkActive" [routerLink]="'/' + r.routerLink">
+                            <span>{{r.name}}</span>
+                        </a>
+                    </li>
+                    
+                </ul> -->                
+            </li>
+            <li *ngIf="login == 'Vendor' && dairyStatus !== true && planType == 3 ">
+                <a style="color:rgb(61, 53, 53) ;" routerLinkActive="active" class="nav-link" (click)="toggleSubRoutes()" >
+                     <span>Settings <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                </a>
+                <ul class="vertical-nav-menu nav-pills" *ngIf="showSubRoutes">
+                    <li class="nav-item nav-pills parent" >
+                        <a  [routerLink]="['/vendor/setting/appinfo']" class="nav-link" routerLinkActive="active">
+                           Dairy Details
+                        </a>
+                    </li>
+                    <li class="nav-item nav-pills parent">
+                        <a [routerLink]="['/vendor/setting/dairy-topup-list']" class="nav-link" routerLinkActive="active">
+                           Top Up
+                        </a>
+                    </li>
+                 
+                    <li class="nav-item nav-pills parent">
+                        <a [routerLink]="['/vendor/setting/offline-costumer-list']" class="nav-link" routerLinkActive="active">
+                          Offline Customer List
+                        </a>
+                    </li>
+                
+                    <li class="nav-item nav-pills parent">
+                        <a [routerLink]="['vendor/setting/subscription-list']" class="nav-link" routerLinkActive="active">
+                            Subscription
+                        </a>
+                    </li>
+
+                    <li class="nav-item nav-pills parent">
+                        <a [routerLink]="['vendor/setting/delivery-man-list']" class="nav-link" routerLinkActive="active">
+                            Delivery
+                        </a>
+                    </li>
+
+                    <li class="nav-item nav-pills parent">
+                        <a [routerLink]="['vendor/setting/customer-list']" class="nav-link" routerLinkActive="active">
+                            Customer
+                        </a>
+                    </li>
+
+                    <li class="nav-item nav-pills parent">
+                        <a [routerLink]="['vendor/setting/area-list']" class="nav-link" routerLinkActive="active">
+                            Area
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+
+            <li *ngIf="planType == 1" class="nav-item nav-pills parent">
+                <a [routerLink]="['/vendor/setting/customer-list']" class="nav-link" routerLinkActive="active">
+                  Customer List
+                </a>
+            </li>
+            
+        </ul>
+        </ng-container>        
+     </div>
+ </div>
+ </div>
+
+
+
+
+<!--<div class="app-main">
+    <div class="app-sidebar sidebar-shadow">      
+       
+        <div class="scrollbar-sidebar">
+            <div class="app-sidebar__inner">
+                <ul class="sidebar_menu mobile-menu-holder">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#" class="active">My Products</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Coupons</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Newsletters</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   </div>
+    
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+          
+            <div class="admin_a form_dashbord">			
+            
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                
+                <div class="row align-items-end">
+                    <div class="col-md-5">
+                        <label>Date</label>
+                        <input type="text" placeholder="From Date" class="form-control">
+                    </div>
+                    
+                    <div class="col-md-5 text-right">
+                        <label><a href="#">Reset</a></label>
+                        <input type="text" placeholder="To date" class="form-control">
+                    </div>
+                    
+                    <div class="col-md-2 xs-mt-30">
+                        <input type="submit" value="" class="go_now">
+                    </div>							
+                </div>
+                
+            </div>
+        </div>
+            
+        <div class="row">
+        
+            <div class="col-lg-6 col-md-12 mt-30">
+                <label>Sales Over Time</label>
+                <div class="half_box">
+                    
+                    <div class="d-flex align-items-center" style="background:#eee;">
+                        <h5>Sales YTD</h5>
+                        <a href="#">View Report</a>
+                    </div>							
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12 mt-30">
+                <label>Sales By Product</label>
+                <div class="half_box">
+                    
+                    <div class="d-flex align-items-center" style="background:#eee;">
+                        <h5>Top 10 Product by sales</h5>
+                        <a href="#">View Report</a>
+                    </div>							
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12 mt-30">
+                <label>Sales Over Time</label>
+                <div class="half_box">
+                    
+                    <div class="d-flex align-items-center" style="background:#eee;">
+                        <h5>Sales YTD</h5>
+                        <a href="#">View Report</a>
+                    </div>							
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12 mt-30">
+                <label>Sales Over Time</label>
+                <div class="half_box">
+                    
+                    <div class="d-flex align-items-center" style="background:#eee;">
+                        <h5>Sales YTD</h5>
+                        <a href="#">View Report</a>
+                    </div>							
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12 mt-30">
+                <label>Sales Over Time</label>
+                <div class="half_box">
+                    
+                    <div class="d-flex align-items-center" style="background:#eee;">
+                        <h5>Sales YTD</h5>
+                        <a href="#">View Report</a>
+                    </div>							
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12 mt-30">
+                <label>Sales Over Time</label>
+                <div class="half_box">
+                    
+                    <div class="d-flex align-items-center" style="background:#eee;">
+                        <h5>Sales YTD</h5>
+                        <a href="#">View Report</a>
+                    </div>							
+                    
+                </div>
+            </div>
+        
+        </div>
+            
+        </div>
+    
+        </div>
+    </div>-->
+  

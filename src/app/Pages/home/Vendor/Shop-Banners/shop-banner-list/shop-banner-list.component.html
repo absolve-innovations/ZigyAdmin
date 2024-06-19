@@ -1,0 +1,130 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+
+        <div class="d-flex if_xs_btn mt-30">
+            <input type="text" placeholder="Search Banners" class="btn_border search_here" [(ngModel)]="searchText"
+             (input)="addSpaceAfterText()" (click)="onSearch(search)">
+            <a [routerLink]="['/shop-banner-list/add-edit-banner']" class="btn_blue ml-auto">Add New Banner</a>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="d-flex flex-wrap if_xs_btn mb-30 justify-content-between">
+
+                <div class="cate-align ">
+                    <label>Banner Type</label>
+                    <select type="text" class="control-form mr-20 btn_border" formControlName="shopBannerType"
+                        #bannerTypeSelect (change)="onBannerTypeChange(bannerTypeSelect.value)">
+                        <option value="">Select</option>
+                        <option value="ShopBanner">Shop Banner </option>
+                        <option value="ShopCategoryBanner">Shop Category Banner </option>
+                        <option value="BrandBanner">Brand Banner </option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="d-flex flex-wrap if_xs_btn mb-30 justify-content-between" *ngIf="showBrandDiv">
+                <div class="cate-align">
+                    <label>Main Category</label>
+                    <select type="text" class="control-form mr-20 btn_border" formControlName="mainProductCategoryId"
+                        (change)="getSubcategoryList(f['mainProductCategoryId'].value);filterAllBannersList(); onCategoryFilterChange('Main')">
+                        <option value="" disabled>Select </option>
+                        <option *ngFor="let item of categoryList" [ngValue]="item?.mainProductCategoryId">
+                            {{item?.categoryName}}</option>
+                    </select>
+                </div>
+
+                <div class="cate-align">
+                    <label>Sub Category</label>
+                    <select type="text" class="control-form mr-20 btn_border" formControlName="subProductCategoryId"
+                        (change)="getSubSubcategoryList(s['subProductCategoryId'].value);filterAllBannersList();onCategoryFilterChange('Sub')">
+                        <option value="" disabled>Select </option>
+                        <option *ngFor="let item of subCategoryList" [ngValue]="item?.subProductCategoryId">
+                            {{item?.categoryName}}</option>
+                    </select>
+                </div>
+
+                <div class="cate-align">
+                    <label>Sub Sub Category</label>
+                    <select type="text" class="control-form btn_border" formControlName="subSubProductCategoryId"
+                        (change)="filterAllBannersList() ;onCategoryFilterChange('SubSub')">
+                        <option value="" disabled>Select </option>
+                        <option *ngFor="let item of SubSubcategoryList" [ngValue]="item?.subSubProductCategoryId">
+                            {{item?.categoryName}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+
+        <div class="table-responsive">
+            <table class="table admin_table">
+                <tr>
+                    <th>Create Date </th>
+                    <th>Banner Image</th>
+                    <th>Banner Type </th>
+                    <th *ngIf="bannerTypeSelect.value === 'BrandBanner'">Brand Name </th>
+                    <th *ngIf="selectedFilter === 'Main'">Main Category</th>
+                    <th *ngIf="selectedFilter === 'Sub'">Sub Category</th>
+                    <th *ngIf="selectedFilter === 'SubSub'">Sub Sub Category</th>
+                    <th>Action</th>
+                </tr>
+                <tr
+                    *ngFor="let item of shopBannerList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' }  ">
+                    <td>
+                        {{item?.createDate}}
+                    </td>
+                    <td class="profile"><img [src]="rootUrl + item?.bannerImage" class="img-responsive"></td>
+                    <td>
+                        {{item?.bannerTypeName}}
+
+                    </td>
+                    <td *ngIf="bannerTypeSelect.value === 'BrandBanner'">{{ item?.brandName }}</td>
+                    <td *ngIf="selectedFilter === 'Main'">{{ item?.mainProductCategoryName }}</td>
+                    <td *ngIf="selectedFilter === 'Sub'">{{ item?.subProductCategoryName }}</td>
+                    <td *ngIf="selectedFilter === 'SubSub'">{{ item?.subSubProductCategoryName }}</td>
+                    <!-- <td>{{item.createDate}}</td> -->
+                    <td>
+                        <a [routerLink]="['/shop-banner-list/shop-banner-detail/'] + item?.shopBannerId "><i
+                                class="fa fa-eye"></i></a>
+
+                        <a [routerLink]="['/shop-banner-list/edit-banner/',item.shopBannerId, item.shopId]">
+                            <i class="fa fa-pencil"></i></a>
+
+                        <a data-toggle="modal" data-target="#confirm-mess" (click)="delet(item)">
+                            <i class="fa fa-times"></i>
+                        </a>
+
+                    </td>
+                    <!-- Modal -->
+                    <div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog"
+                        aria-labelledby="confirm-messLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content warning-content">
+
+                                <div class="modal-body text-center warning-mess-sec">
+                                    <button type="button" class="close float-right" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <img src="assets\img\warning.png">
+                                    <h2>Alert</h2>
+                                    <p>Are You Sure, You want to delete it?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+                                    <button type="button" class=" btn_blue" (click)="deleteShopBanners()">Yes, Delete
+                                        It</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </table>
+            <div class="no-data text-center" *ngIf="shopBannerList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+        </div>
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page" class="paginate-doctor-list">
+        </pagination-controls>
+    </div>
+</div>

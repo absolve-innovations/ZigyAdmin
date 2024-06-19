@@ -1,0 +1,441 @@
+<div class="app-main__outer">
+    <div class="admin_a form_dashbord">
+        <div *ngIf="isValidFormSubmitted" class="submitted"> Form submitted successfully. </div>
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Vendor form</h2>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="vendor-form mt-40 bg-white">
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="text-center">
+                                <h2>Add Profile Picture</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 mt-30">
+                            <!-- <div class="upload_file text-center">
+                            <input type="file" class="control-form">
+                            <label for="file">Upload</label>									
+                        </div> -->
+                            <div class="imges-upload mb-0">
+                                <div class="imgUp m-auto">
+                                    <div class="imagePreview" [style.background-image]="'url(' + editImages + ')'">
+                                    </div>
+                                    <!-- {{imageFile}}/ -->
+                                    <label class="upload button btn btn-primary">
+                                        <!-- <input value="rootUrl + homeServicesData.imagePath" name="bannerHidden" type="hidden"> -->
+                                        Upload<input type="file" class="uploadFile img" name="bannerimage"
+                                            style="width: 0px;height: 0px;overflow: file; border-style: none;"
+                                            id="bannerimage" (change)="imagesUpload($event)">
+                                    </label>
+                                    <div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Personal Detail</h3>
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <label>First Name</label>
+                            <input type="text" class="control-form" formControlName="firstName">
+                            <label *ngIf="firstName?.invalid && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                First name is required.
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Last Name</label>
+                            <input type="text" class="control-form" formControlName="lastName">
+                            <label *ngIf="lastName?.invalid && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Last name is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Email</label>
+                            <input type="email" class="control-form" formControlName="email">
+                            <label *ngIf="email?.invalid && submitted != null && !submitted" class="invalid-formdata">
+                                Email is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Gender</label>
+                            <select type="text" class="control-form" formControlName="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <label *ngIf="gender?.invalid && submitted != null && !submitted" class="invalid-formdata">
+                                Gender is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Dial Code</label>
+                            <input type="text" class="control-form" formControlName="dialCode" OnlyNumbers>
+                            <label *ngIf="dialCode?.invalid && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Dial Code is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Phone Number</label>
+                            <input type="text" class="control-form" formControlName="phoneNumber" OnlyNumbers>
+                            <label *ngIf="phoneNumber?.invalid && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Phone number must be 10 digits.
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Country</label>
+                            <select type="text" class="control-form" formControlName="countryId">
+                                <option [selected]="true">India </option>
+                            </select>
+                            <label *ngIf="countryId?.invalid && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Country is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>State</label>
+                            <select type="text" class="control-form" formControlName="stateId">
+                                <option value="" selected>Choose State</option>
+                                <option *ngFor="let app of statesLists" [ngValue]="app?.stateId">{{app?.stateName}}
+                                </option>
+                            </select>
+                            <label *ngIf="stateId?.invalid && submitted != null && !submitted" class="invalid-formdata">
+                                State is required.
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end first form -->
+
+            <div class="vendor-form bg-white" formArrayName="shopDetail">
+                <h3>Business Detail</h3>
+                <div class="this_row" *ngFor="let item of shopDetail.controls;  let i = index;" [formGroupName]="i">
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-6 mb-20">
+                            <label>Shop Image</label><br>
+
+                            <input class="uploadFile img" name="bannerimage" #Image type="file"
+                                (change)="handleFileInput($event)" />
+                            <label class="preview-butn" *ngIf="imageUrl" data-toggle="modal"
+                                data-target="#myModal">preview</label>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <label>Shop name</label>
+                            <input type="text" class="control-form" formControlName="shopName" value="shopName">
+                            <label
+                                *ngIf="shopDetail.controls[i].get('shopName')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Shop name is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <label>Shop Description</label>
+                            <textarea type="text" class="control-form" formControlName="shopDescription"></textarea>
+                            <label
+                                *ngIf="shopDetail.controls[i].get('shopDescription')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Description is required.
+                            </label>
+                        </div>
+
+                        <!-- <div class="col-lg-12 col-md-12">
+                            <label>Shop Address</label>
+                            <input type="text" class="control-form" formControlName="shopAddress">
+                            <label
+                                *ngIf="shopDetail.controls[i].get('shopAddress')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Shop address is required.
+                            </label>
+                        </div> -->
+                        <div class="col-lg-12 col-md-12">
+                            <h5 class="mb-3">Shop Address</h5>
+                            <a type="button" class="map" (click)="setCurrentLocation()">Get Current Location</a>
+                            <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                                placeholder="Search Nearest Location" autocorrect="on" autocapitalize="off"
+                                spellcheck="off" type="text" [(ngModel)]="addressStreet"
+                                [ngModelOptions]="{standalone: true}" #search>
+                            <label
+                                *ngIf="shopDetail.controls[i].get('addressStreet')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Shop Address is required.
+                            </label>
+
+                            <br>
+                            <agm-map (mapReady)="mapReady($event)" style="height:240px" [zoom]="zoom"
+                                [latitude]="addressLat" [longitude]="addressLong">
+                                <agm-marker [latitude]="addressLat" [longitude]="addressLong"
+                                    [markerDraggable]="true"></agm-marker>
+
+                            </agm-map>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Landmark</label>
+                            <input type="text" class="control-form" formControlName="landmark">
+                            <label
+                                *ngIf="shopDetail.controls[i].get('landmark')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Landmark is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>City</label>
+                            <input type="text" class="control-form" formControlName="city">
+                            <label
+                                *ngIf="shopDetail.controls[i].get('city')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                City is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-3 col-md-12">
+                            <label>Zip Code</label>
+                            <input type="text" class="control-form" formControlName="zip" numbersOnly>
+                            <label
+                                *ngIf="shopDetail.controls[i].get('zip')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Zip code is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-3 col-md-12">
+                            <label>GST No</label>
+                            <input type="text" class="control-form" formControlName="gstnumber">
+                            <label
+                                *ngIf="shopDetail.controls[i].get('gstnumber')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Please enter your valid GST number.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>PAN</label>
+                            <input type="text" class="control-form" formControlName="businessPAN">
+                            <label
+                                *ngIf="shopDetail.controls[i].get('businessPAN')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Pan no is required.
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end first form -->
+
+            <!-- <div class="vendor-form bg-white">
+
+                <h3>Bank Detail</h3>
+
+                <div class="this_row" formArrayName="bankDetail">
+                    <div class="row" *ngFor="let item of bankDetail.controls;  let i = index;" [formGroupName]="i">
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Bank Name</label>
+                            <input type="text" class="control-form" formControlName="bankName">
+
+                            <label
+                                *ngIf="bankDetail.controls[i].get('bankName')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Bank name required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Branch Name</label>
+                            <input type="text" class="control-form" formControlName="branchName">
+                            <label
+                                *ngIf="bankDetail.controls[i].get('branchName')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Branch name required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Account Holder Name</label>
+                            <input type="text" class="control-form" formControlName="bankAccountHolderName">
+                            <label
+                                *ngIf="bankDetail.controls[i].get('bankAccountHolderName')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Bank holder name is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Account No.</label>
+                            <input type="password" class="control-form" formControlName="bankAccountNumber" 
+                                (cut)="DisableCut($event)" (copy)="DisableCopy($event)" (paste)="DisablePaste($event)" numbersOnly>
+                            <label
+                                *ngIf="bankDetail.controls[i].get('bankAccountNumber')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Account no is required.
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>Confirm Account No.</label>
+                            <input type="password" class="control-form" formControlName="confirmbankAccountNumber"
+                                (cut)="DisableCut($event)" (copy)="DisableCopy($event)" (paste)="DisablePaste($event)" numbersOnly>
+                            <label
+                                *ngIf="bankDetail.controls[i].get('confirmbankAccountNumber')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Confirm bank account no.
+                            </label>
+                            <div *ngIf="bankDetail.controls[i].get('confirmbankAccountNumber')?.errors?.['mustMatch'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Account no must be match</div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>IFSC CODE</label>
+                            <input type="text" class="control-form" formControlName="ifsc">
+                            <label
+                                *ngIf="bankDetail.controls[i].get('ifsc')?.errors?.['required'] && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Ifsc code is required.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+
+            <!-- <div class="vendor-form bg-white">
+               
+                <div class="this_row" formArrayName="upiDetail">
+                    <div class="row" >
+                        <div class="col-lg-12">
+                            <div class="upi-detail-head">
+                            <h3>UPI Detail</h3>
+                            <a class="btn_blue add-butn"  (click)="add()"><i class="fa fa-plus mr-2" aria-hidden="true" ></i> Add</a>
+                        </div>
+                        </div>
+                    </div>
+                        <div  class="row" *ngFor="let item of List1().controls;  let i = index;" [formGroupName]="i">
+                        <div class="col-lg-5 col-md-12">
+                            <label>Bank Name </label>
+                            <input type="text" formControlName="bankName" class="control-form">
+                        </div>
+
+                        <div class="col-lg-5 col-md-12">
+                            <label>Account Holder Name</label>
+                            <input type="text"formControlName="accountHolderName" class="control-form">
+                        </div>
+                        <div class="col-lg-2">
+                            <a class="trash-butn" (click)="deleteHomeData(item,i)"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12">
+                            <label>UPI Id </label>
+                            <input type="text" formControlName="upiid" class="control-form" numberOnly>
+                        </div>
+                        <div class="col-lg-5 col-md-12">
+                            <label>QR Image</label><br>
+                           <label><img [src]="item.value.qrcode"></label> 
+                            <input class="uploadFile img" name="bannerimage"   #Image type="file" (change)="handleQrFileInput($event)" />
+                            <label data-toggle="modal" data-target="#myModal4"
+                                class="preview-butn" >preview</label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mt-3">
+                            <label class="mr-3">Status</label>
+                            <label class="switch">
+                                <input type="checkbox"  formControlName="isActive"  (change)='checkStatus($event)'>
+                                    >
+                                    
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div> -->
+
+            <div class="vendor-form bg-white ">
+                <div class="col-lg-12 col-md-12  text-center">
+                    <button class="border-btn" type="submit" value="" data-toggle="modal"
+                        data-target="#cancel-mess">Cancel</button>
+                    <button class="btn_blue " type="submit" (click)="postVendor()" value="">Submit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade vendor-popup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content popup_advance">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <div class="imagePreview">
+                    <img [src]="imageUrl">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade vendor-popup" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitles"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered modal-sm" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content popup_advance">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <div class="imagePreview" *ngFor="let item of urls[0];  let i = index;" [formGroupName]="i">
+                    <img [src]="item">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Cancel Modal -->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content warning-content">
+            <div class="modal-body text-center warning-mess-sec">
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="assets\img\warning.png">
+                <h2>Alert</h2>
+                <p>Are You Sure, You want to Cancel it?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+                <button type="button" class=" btn_blue" (click)="  cancel()">Yes, Cancel It</button>
+            </div>
+        </div>
+    </div>
+</div>

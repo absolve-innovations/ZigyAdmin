@@ -1,0 +1,65 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="d-flex if_xs_btn mt-30">
+            <input type="text" placeholder="Search Banner" class="btn_border search_here" [(ngModel)]="searchText"
+            (input)="addSpaceAfterText()" (click)="onSearch(search)">
+            <a [routerLink]="['/banner-list/add-edit-banner']" class="btn_blue ml-auto">Add New Banner</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table admin_table">
+                <tr>
+                    <th>Date</th>
+                    <th>Banner Image</th>
+                    <th>Banner Type</th>
+                    <th>Action</th>
+                </tr>
+                <tr
+                    *ngFor="let item of bannerList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' }  ">
+                    <td>
+                        {{item?.createDate}}
+                    </td>
+                    <td class="profile"><img [src]="rootUrl + item?.bannerImage" class="img-responsive"></td>
+                    <td>
+                        {{item?.bannerType}}
+
+                    </td>
+                    <td>
+                        <a [routerLink]="['/banner-list/banner-detail/'] + item?.bannerId "><i
+                                class="fa fa-eye"></i></a>
+                        <a (click)="edit(item)"><i class="fa fa-pencil"></i></a>
+                        <a data-toggle="modal" data-target="#list-cross-mess" (click)="delet(item)">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                    <div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog"
+                        aria-labelledby="cancel-messLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content warning-content">
+                                <div class="modal-body text-center warning-mess-sec">
+                                    <button type="button" class="close float-right" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <img src="assets\img\warning.png">
+                                    <h2>Alert</h2>
+                                    <p>Are You Sure, You want to Delete it?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class=" border-btn" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class=" btn_blue" (click)="deleteHomeBanners()">Yes,
+                                        Delete It</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </table>
+            <div class="no-data text-center" *ngIf="bannerList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+        </div>
+        <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page" class="paginate-doctor-list">
+        </pagination-controls>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div *ngIf="login == 'SuperAdmin'" class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Membership</h2>
+        </div>
+
+        <div class="vendor-form bg-white mt-30 membership-section">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 text-center mb-30" *ngFor="let item of planList">
+                    <div class="card rounded-lg shadow animation-card">
+                        <img src="assets/img/popular-tag.png" aria-hidden="true" class="popular-img"
+                            *ngIf="item.isPopular == true">
+                        <div class="card-header">
+                            <h2 class="w-100">{{item.planName}}</h2>
+                        </div>
+                        <div class="card-body rounded-bottom position-relative">
+                            <h3>{{item.planPrice}}</h3>
+                            <p *ngIf="item.planDuration == 1">Monthly</p>
+                            <p *ngIf="item.planDuration == 2">Quarterly</p>
+                            <p *ngIf="item.planDuration == 3">Semi Annually</p>
+                            <p *ngIf="item.planDuration == 4">Annually</p>
+                            <div class="discount-item" *ngIf="item.discountInPercentage">
+                                <h6>{{item?.discountInPercentage}}% <br>Off</h6>
+                            </div>
+                            <ul class="mb-4 list-item-none">
+                                <li class="mb-1 ">Exclusive GST of 18%</li>
+                            </ul>
+                            <h3>Total = &#8377; <span> {{item?.totalAmount}}</span></h3>
+
+                            <button *ngIf="item.isActive != true" class="bg-blue active-plan text-uppercase rounded-lg "
+                                (click)="payment(item)" rel="noopener noreferrer">Get
+                                Started</button>
+                            <div *ngIf="item.isActive == true">
+                                <button type="button" class="active-plan">Active Plan</button>
+                                <p class="expiry-date mb-0 ">Expiry Date: <span>{{item.expiryDate}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal -->
+
+<div class="modal fade" id="myModalpayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content for-payment popup_advance">
+            <div class="modal-header justify-content-center">
+                <h5 class="modal-title ">Payment Methods</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-butn-group text-center">
+                <div class="modal-dropdown  dropdown w-100">
+                    <a type="button" class=" btn_blue ml-auto pay-by-upi dropdown-toggle" id="dropdownMenuButton2"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay by UPI</a>
+                    <div class="sub-modal shadow pay-by-upi-box dropdown-menu" id="myDIV"
+                        aria-labelledby="dropdownMenuButton">
+                        <p>{{plandetail?.upiId}}</p>
+                        <i class="fa fa-copy float-right" (click)="copyItem(plandetail?.upiId)"></i>
+                    </div>
+                </div>
+
+                <div class="modal-dropdown dropdown w-100">
+                    <a type="button" class=" btn_blue ml-auto mt-3 pay-at-QR dropdown-toggle" id="dropdownMenuButton2"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay at QR Code</a>
+                    <div class="sub-modal shadow pay-at-QR-box dropdown-menu" id="myDIV1"
+                        aria-labelledby="dropdownMenuButton">
+                        <img [src]="rootUrl + plandetail?.qrCode">
+                    </div>
+                </div>
+
+                <div class="modal-dropdown dropdown w-100">
+                    <a type="button" class=" btn_blue ml-auto mt-3 Account-IFSC dropdown-toggle"
+                        id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">Account + IFSC</a>
+                    <div class="sub-modal shadow Account-IFSC-box dropdown-menu" id="myDIV2"
+                        aria-labelledby="dropdownMenuButton">
+                        <h5>Account Details</h5>
+                        <div class="account-form row">
+                            <div class="col-12 d-flex">
+                                <label class="mr-10">Account Holder Name</label>
+                                <p>{{accountDetail?.bankAccountHolderName}}</p>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <label class="mr-10">Account Number </label>
+                                <p>{{accountDetail?.bankAccountNumber}}</p>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <label class="mr-10">IFSC Code </label>
+                                <p>{{accountDetail?.ifsc}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-dropdown dropdown w-100">
+                    <a type="button" class=" btn_blue ml-auto mt-3 Upload-receipt dropdown-toggle"
+                        id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">Upload Receipt</a>
+                    <div class="sub-modal shadow Upload-receipt-box dropdown-menu" id="myDIV3"
+                        aria-labelledby="dropdownMenuButton">
+                        <div class="account-form vendor-form">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <div class="upload_file text-center">
+                                            <div class="imges-upload mb-0">
+                                                <div class="imgUp m-auto w-100">
+                                                    <div class="imagePreview"
+                                                        [style.background-image]="'url(' + editImages + ')'"></div>
+                                                    <label class="upload button btn btn-primary">
+                                                        Upload
+                                                        <input type="file" class="uploadFile img" name="bannerimage"
+                                                            style="width: 0px;height: 0px;overflow: file; border-style: none;"
+                                                            id="bannerimage" (change)="imagesUpload($event)">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn_blue submodal-submit my-3">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Phone Pe-->
+                <div class="modal-dropdown dropdown w-100">
+                    <a href="https://mercury-uat.phonepe.com/transact/simulator?token=czlMZ0unBlTRtfB6sOeUWBGJXy0ZfWPTb7BHECybezZ"
+                        class=" btn_blue ml-auto mt-3" id="dropdownMenuButton2" aria-haspopup="true"
+                        aria-expanded="false">Phonepe</a>
+                </div>
+                <!-- <a type="button" class=" btn_blue ml-auto mt-3" (click)="payCash()">Pay By Cash</a> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,145 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+
+        <h2>Collection Detail</h2>
+
+        <div class="vendor-form ">
+
+            <!-- <div class="row justify-content-center">
+                <div class="col-lg-12 mb-4 d-flex justify-content-evenly">
+                    <div class="image-back mr-10" style="background-color: #fff;" *ngFor="let image of collectiondetail.collectionImage ">
+                        <img
+                            class="image" style="max-width: 450px;"
+                            [src]="rootUrl + image.collectionImage"></div>
+                </div>
+   
+            </div> -->
+
+            <!-- <div id="carouselExampleIndicators" class="carousel slide mb-5" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active"
+                        *ngFor="let image of collectiondetail.collectionImage  let i = index"
+                        [ngClass]="{'active': i == 0 }">
+                        <img class="d-block w-100" [src]="rootUrl + image.collectionImage" alt="First slide">
+                    </div>
+
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div> -->
+            <div id="carouselExampleIndicators" class="carousel slide mb-5" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngFor="let item of  collectiondetail?.collectionImage let i = index"
+                        [ngClass]="{'active': i == 0 }">
+                        <img class="d-block w-100" [src]="rootUrl + item?.collectionImage" alt="First slide">
+                    </div>
+
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+
+
+
+            <div class="vendor-form mt-40" style="background: #fff; padding-bottom: 60px;">
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Vendor Name:</dt>
+                                <dd>{{collectiondetail?.vendorName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Collection Name:</dt>
+                                <dd>{{collectiondetail?.collectionName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>MRP:</dt>
+                                <dd>{{collectiondetail?.mrp}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Manufacturing Date:</dt>
+                                <dd>{{collectiondetail?.manufacturingDate}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>is featured:</dt>
+                                <dd>{{collectiondetail?.isFeatured}}</dd>
+                            </dl>
+
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Shop Name:</dt>
+                                <dd>{{collectiondetail?.shopName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Create Date:</dt>
+                                <dd>{{collectiondetail?.createDate}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Discount:</dt>
+                                <dd>{{collectiondetail?.discount}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Expiry Date:</dt>
+                                <dd>{{collectiondetail?.expiryDate}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vendor-form mt-30" style="background: #fff; padding-bottom: 60px;">
+                <h3>Product</h3>
+                <div class="this_row">
+                    <div class="row ng-star-inserted">
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Product Name:</dt>
+                                <dd>{{collectionProduct?.productName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Quantity:</dt>
+                                <dd>{{collectionProduct?.quantity}} {{collectionProduct?.quantityTypeName}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Product Count:</dt>
+                                <dd>{{collectionProduct?.productCount}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>

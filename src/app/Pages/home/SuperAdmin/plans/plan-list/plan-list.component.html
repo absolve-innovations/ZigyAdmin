@@ -1,0 +1,121 @@
+<div class="app-main__outer">
+
+    <div class="admin_a">
+
+        <div class="d-flex if_xs_btn mt-30">
+            <div class="broad-search top-head">
+                <input type="text" placeholder="Search Here " class="btn_border search_here"   [(ngModel)]="searchText" (click)="performSearch()"
+                (input)="addSpaceAfterText()" (click)="onSearch(search)">
+                <a style="color: white!important;" data-toggle="modal" data-target="#myModalpurchase-membership"
+                    class="btn_blue ml-3 mb-0">Filter</a>
+            </div>
+
+            <a style="color: white!important;" class="btn_blue ml-auto" [routerLink]="['/plan-list/add-edit-plan']">Add
+                Plan</a>
+        </div>
+
+        <div class="vendor-form bg-white  membership-section">
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-12">
+                    <div class="package-main" *ngFor="let item of planList | filter:searchText ">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h4 class="text-blue">{{item?.planName}}</h4>
+                                <p>{{item?.planDurationName}}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h4 class="text-blue">PlanType</h4>
+
+                                <p *ngIf="item?.planType == 1 ">grocery </p>
+                                <p *ngIf="item?.planType == 2 ">Dairy </p>
+                                <p *ngIf="item?.planType == 3 ">Combo </p>
+                            </div>
+
+                            <div class="col-md-3 m-auto text-center">
+                                <h3 class="font-italic"><span>&#8377; </span> {{item?.planPrice}}</h3>
+                            </div>
+
+                            <img *ngIf="item.isPopular" src="assets\img\popular-tag.png" class="popular-tag">
+                            <div class="col-md-3 m-auto text-right">
+                                <a>
+                                    <i class="fa fa-eye"
+                                        [routerLink]="['/plan-list/plan-detail/',item.membershipPlanId]">
+                                    </i>
+                                </a>
+                                <a>
+                                    <i class="fa fa-pencil" (click)="editPlan(item)"></i>
+                                </a>
+                                <!-- <a>
+                                    <i class="fa fa-times"   (click)="deleteAddedPlan(item.membershipPlanId)"></i>
+                                </a> -->
+                                <a data-toggle="modal" data-target="#list-cross-mess" (click)="delet(item)">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                            <!-- Modal For Delete Plans-->
+                            <div class="modal fade" id="list-cross-mess" tabindex="-1" role="dialog"
+                                aria-labelledby="cancel-messLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content warning-content">
+
+                                        <div class="modal-body text-center warning-mess-sec">
+                                            <button type="button" class="close float-right" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <img src="assets\img\warning.png">
+                                            <h2>Alert</h2>
+                                            <p>Are You Sure, You want to Delete it?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class=" border-btn"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class=" btn_blue" (click)="deleteAddedPlan()">Yes,
+                                                Delete It</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal -->
+    <div class="modal fade" id="myModalpurchase-membership" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+            style="border-radius:15px; overflow:hidden; border:none;">
+            <div class="modal-content for-payment popup_advance">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply Filter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form [formGroup]="form">
+                    <div class="modal-body vendor-form pb-0 ">
+                        <div class="">
+                            <label>Select Filter</label>
+                            <select type="text" class="control-form mb-0 btn_border" formControlName="planType">
+                                <option value="">All</option>
+                                <option value="1">Grocery</option>
+                                <option value="2">Dairy</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <a type="button" class="border-btn cancelinfilter" data-dismiss="modal"
+                        (click)="backClickedreload()">Reset</a>
+                    <a style="color: white !important;" type="button" class=" btn_blue" data-dismiss="modal"
+                        (click)="getPlanListFilter()">Apply</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

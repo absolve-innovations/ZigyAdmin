@@ -1,0 +1,160 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2> Customer </h2>
+        </div>
+
+        <form [formGroup]="form">
+
+            <div class="vendor-form bg-white mt-40">
+
+                <div class="this_row">
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-12">
+                            <label>First Name</label>
+                            <input type="text" formControlName="customerFirstName" class="control-form" appAlphabeticOnly >
+                            <div *ngIf="submitted && f['customerFirstName'].errors" class="invalid-formdata">
+                                First Name is required.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Last Name </label>
+                            <input type="text" class="control-form " formControlName="customerLastName" appAlphabeticOnly >
+                            <div *ngIf="submitted && f['customerLastName'].errors" class="invalid-formdata">
+                                Last Name is required.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Phone Number</label>
+                            <input type="text" class="control-form " formControlName="customerPhone" OnlyNumbers>
+                            <div *ngIf="submitted && f['customerPhone'].errors" class="invalid-formdata">
+                                Phone Number must be 10 digits.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Gender
+                            </label>
+                            <select type="text" class="control-form " formControlName="customerGender">
+                                <option value="">Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                            <div *ngIf="submitted && f['customerGender'].errors" class="invalid-formdata">
+                               Gender is required.
+                              </div>
+                        </div>
+                        
+                        <!-- <div class="col-lg-6 col-md-12">
+                            <label>Country</label>
+                            <input type="text" class="control-form" formControlName="countryId">
+                            <select type="text" class="control-form" formControlName="countryId">
+                                <option [selected]="true">India </option>
+                            </select>
+                            <label *ngIf="countryId?.invalid && submitted != null && !submitted"
+                                class="invalid-formdata">
+                                Country is required.
+                            </label>
+                        </div> -->
+                        <!-- <div class="col-lg-6 col-md-12">
+                            <label>State</label>
+                            <select type="text" class="control-form" formControlName="stateId">
+                                <option value="" selected>Choose State</option>
+                                <option *ngFor="let app of statesLists" [ngValue]="app?.stateId">{{app?.stateName}}
+                                </option>
+                            </select>
+                            <label *ngIf="stateId?.invalid && submitted != null && !submitted" class="invalid-formdata">
+                                State is required.
+                            </label>
+                        </div> -->
+                        <div class="col-lg-6 col-md-12">
+                            <label>Subscription Start Date</label>
+                            <input type="text" class="control-form " formControlName="subscriptionStartDate" bsDatepicker [bsConfig]="datePickerConfig" numbersOnly>
+                            
+                          <div *ngIf="submitted && f['subscriptionStartDate'].errors" class="invalid-formdata">
+                            Subscription Start Date is required.
+                          </div>
+                        </div>
+                        
+                        <!-- <div class="col-lg-6 col-md-12">
+                            <label>Subscription Type</label>
+                            <input type="text" class="control-form " formControlName="deliveryManPhoneNumber" numbersOnly>
+                          <div *ngIf="submitted && f['deliveryManPhoneNumber'].errors" class="invalid-formdata">
+                            Subscription Type is required.
+                          </div>
+                        </div> -->
+                        <div class="col-lg-6 col-md-12">
+                            <label>Subscription Type
+                            </label>
+                            <select type="text" class="control-form " formControlName="subscriptionType">
+                                <option>Select</option>
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Every 3 Day</option>
+                                <option>Alternate Day</option>
+                            </select>
+                            <div *ngIf="submitted && f['subscriptionType'].errors" class="invalid-formdata">
+                                Subscription Type is required.
+                              </div>
+                            
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Wallet Amount</label>
+                            <input type="text" class="control-form " formControlName="walletAmount" OnlyNumbers>
+                            <div *ngIf="submitted && f['walletAmount'].errors" class="invalid-formdata">
+                                Wallet Amount is required.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Address</label>
+                            <input type="text" class="control-form " formControlName="customerAddress" >
+                            <div *ngIf="submitted && f['customerAddress'].errors" class="invalid-formdata">
+                                Address is required.
+                              </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mt-3">
+                            <label class="mr-3">Status</label>
+                            <label class="switch">
+                                <input type="checkbox" formControlName="customerStatus" (change)='checkStatus($event)'>
+                                >
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form bg-white ">
+                <div class="col-lg-12 col-md-12  text-center">
+                    <button class="border-btn" type="submit" value="" data-toggle="modal" data-target="#cancel-mess">Cancel</button>
+                    <button class="btn_blue " type="submit"  (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content warning-content">
+        
+        <div class="modal-body text-center warning-mess-sec">
+            <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <img src="assets\img\warning.png">
+            <h2>Alert</h2>
+          <p>Are You Sure, You want to Cancel it?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+          <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+        </div>
+      </div>
+    </div>
+  </div>

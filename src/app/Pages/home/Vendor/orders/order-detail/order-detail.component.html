@@ -1,0 +1,204 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Order Detail</h2>
+        </div>
+
+        <div class="vendor-form mt-40 bg-white pb-60">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Order Date:</dt>
+                            <dd>{{orderDetails?.orderDate}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Total Products:</dt>
+                            <dd>{{orderDetails?.totalProducts}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Delivery Type:</dt>
+                            <dd>{{orderDetails?.deliveryType}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Note:
+                            <dd>{{orderDetails?.customerNote}}</dd>
+                        </dl>
+
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Order Time:</dt>
+                            <dd>{{orderDetails?.orderTime}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Order Id:</dt>
+                            <dd>{{orderDetails?.orderId}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text" *ngIf="orderDetails?.deliveryType === 'Delivery'">
+                            <dt>Delivery man:</dt>
+                            <dd>{{orderDetails?.deliveryManName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Order Status:</dt>
+                            <dd>{{orderDetails?.orderStatus}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-30">Customer Detail</h3>
+        <div class="vendor-form mt-40 bg-white pb-60">
+
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Customer Name:</dt>
+                            <dd>{{orderDetails?.customerFirstName}} {{orderDetails?.customerLastName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>State:</dt>
+                            <dd>{{orderDetails?.state}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Address Type:</dt>
+                            <dd>{{orderDetails?.addressType}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Ship To Name:</dt>
+                            <dd>{{orderDetails?.shipToName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Pincode:</dt>
+                            <dd>{{orderDetails?.pincode}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-12">
+                        <dl class="inform_text">
+                            <dt>Street Address:</dt>
+                            <dd>{{orderDetails?.streetAddress}}</dd>
+                            <!-- <button class="btn btn-link readmore">Read more</button> -->
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-30">Payment Detail</h3>
+        <div class="vendor-form mt-40 bg-white pb-60">
+
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Payment Method:</dt>
+                            <dd>{{orderDetails?.paymentMethod}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Transaction Id:</dt>
+                            <dd>{{orderDetails?.transactionId}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Total Mrp:</dt>
+                            <dd>{{orderDetails?.totalMrp}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Total Discount Amount:</dt>
+                            <dd>{{orderDetails?.totalDiscountAmount}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>CGST:</dt>
+                            <dd>{{orderDetails?.cgst}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>SGST:</dt>
+                            <dd>{{orderDetails?.sgst}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Payment Status:</dt>
+                            <dd>{{orderDetails?.paymentStatus}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Product Invoice Id:</dt>
+                            <dd>{{orderDetails?.productInvoiceId}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Total Selling Price:</dt>
+                            <dd>{{orderDetails?.totalSellingPrice}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Shipping Charges:</dt>
+                            <dd>{{orderDetails?.shippingCharges}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>IGST:</dt>
+                            <dd>{{orderDetails?.igst}}</dd>
+                        </dl>
+                        <!-- <dl class="d-flex inform_text">
+                            <dt>Payment Receipt:</dt>
+                            <dd class="profile">
+                                <a data-toggle="modal" data-target="#myModalpaymentreciept">
+                                    <img [src]="rootUrl + orderDetails?.paymentReceipt" data-toggle="tooltip"
+                                        data-placement="right" title="Preview" alt="img">
+                                </a>
+                            </dd>
+                        </dl> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-30">Products Detail</h3>
+
+        <div class="table-responsive mt-40">
+            <table class="table admin_table  product-detail-table">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Image</th>
+                    <th>SKUID</th>
+                    <th>MRP</th>
+                    <th>Selling Price</th>
+                    <th>Product Count</th>
+                </tr>
+                <tr *ngFor="let item of product; let i =index">
+                    <td class="profile">
+                        <a (click)="navigateToDetail(item)">{{item?.productName}}</a>
+                    </td>
+                    <td class="profile">
+                        <img class="img-responsive" [src]="rootUrl + item?.productImage">
+                    </td>
+                    <td>{{item?.skuid}}</td>
+                    <td>{{item?.totalMrp}}</td>
+                    <td>{{item?.totalSellingPrice}}</td>
+                    <td>{{item?.productCountInCart}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+<div class="modal fade" id="myModalpaymentreciept" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+        style="border-radius:15px; overflow:hidden; border:none;">
+        <div class="modal-content popup_advance">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body text-center">
+                <div class="imagePreview vendor-preview">
+                    <img class="image" [src]="rootUrl + orderDetails.paymentReceipt">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

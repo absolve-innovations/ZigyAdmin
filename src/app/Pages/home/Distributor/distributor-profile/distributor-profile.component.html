@@ -1,0 +1,116 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <h2>Profile</h2>
+        </div>
+        <form [formGroup]="form">
+            <div class="vendor-form mt-40 bg-white">
+
+                <div class="this_row">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 mb-30 text-center">
+                            <h2>Upload Profile Picture</h2>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 mb-40">
+                            <div class="upload_file text-center">
+                                <div class="imges-upload mb-0">
+                                    <div class="imgUp m-auto">
+                                        <div class="imagePreview" [style.background-image]="'url(' + editImages + ')'">
+                                        </div>
+                                        <label class="upload button btn btn-primary">
+                                            Upload<input type="file" class="uploadFile img" name="bannerimage"
+                                                style="width: 0px;height: 0px;overflow: file; border-style: none;"
+                                                id="bannerimage" (change)="imagesUpload($event)">
+                                        </label>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form pt-0 bg-white">
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Email</label>
+                            <input type="email" class="control-form" formControlName="email">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>First Name</label>
+                            <input type="text" class="control-form" formControlName="firstName">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Last Name</label>
+                            <input type="text" class="control-form" formControlName="lastName">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Gender</label>
+                            <select type="text" class="control-form" formControlName="gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Dial Code</label>
+                            <input type="tel" class="control-form" formControlName="dialCode" OnlyNumbers>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Phone Number</label>
+                            <input type="tel" class="control-form" formControlName="phoneNumber" OnlyNumbers>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Country</label>
+                            <select type="text" class="control-form" formControlName="countryId">
+                                <option [selected]="true">India </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <label>State</label>
+                            <select type="text" class="control-form" formControlName="stateId">
+                                <option value="" selected>Choose State</option>
+                                <option *ngFor="let app of statesLists" [ngValue]="app.stateId">{{app.stateName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 col-md-12 mt-40 text-center btn_margin">
+                            <button class="border-btn" type="submit" data-toggle="modal"
+                                data-target="#cancel-mess">Cancel</button>
+                            <button class="btn_blue " type="submit" (click)="postDistributorProfile()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="cancel-mess" tabindex="-1" role="dialog" aria-labelledby="cancel-messLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content warning-content">
+
+            <div class="modal-body text-center warning-mess-sec">
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="assets\img\warning.png">
+                <h2>Alert</h2>
+                <p>Are You Sure, You want to Cancel it?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class=" border-btn" data-dismiss="modal">Close</button>
+                <button type="button" class=" btn_blue" (click)="cancel()">Yes, Cancel It</button>
+            </div>
+        </div>
+    </div>
+</div>

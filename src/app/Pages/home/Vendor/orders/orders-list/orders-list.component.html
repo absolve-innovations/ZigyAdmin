@@ -1,0 +1,421 @@
+<div class="app-main__outer">
+    <form [formGroup]="form">
+        <div class="admin_a">
+            <div class="media mb-5" *ngIf="'Vendor' == role1">
+                <img class="align-self-center mr-3 welcome-image" [src]="rootUrl + image" alt="user">
+                <div class="media-body align-self-center">
+                    <p class="heading" *ngIf="'Vendor' == role">Welcome, <span>{{shopName}}</span></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+
+                        <!-- <div class="Servicepackage">
+                            <div class="col-lg-12">
+                                <div class="d-flex flex-wrap if_xs_btn  justify-content-between">
+                                    <div class="cate-align">
+                                        <label>Availability
+                                        </label>
+                                        <select type="text" formControlName="availabilityStatus"
+                                            class="control-form mr-20 btn_border" (change)="statusOrderTiming()">
+                                            <option value="" disabled selected>Select </option>
+                                            <option value="Open">Open</option>
+                                            <option value="Close">Close</option>
+                                        </select>
+                                    </div>
+                                    <div class="cate-align">
+                                        <label>Expected Delivery Timing </label>
+                                        <select type="text" formControlName="expectedDeliveryTiming"
+                                            class="control-form mr-20 btn_border" (change)="statusOrderTiming2()">
+                                            <option value="" disabled selected>Select </option>
+                                            <option value="WithinTwoHours"> Within two hours </option>
+                                            <option value="WithinOneHour"> Within one hour </option>
+                                        </select>
+                                    </div>
+                                    <div class="cate-align">
+                                        <label>Delivery Facility </label>
+                                        <select type="text" formControlName="deliveryFacility"
+                                            class="control-form btn_border " (change)="statusOrderTiming3()">
+                                            <option value=" " disabled selected>Select </option>
+                                            <option value="OnlyPickup">Only Pickup </option>
+                                            <option value="OnlyDelivery">Only Delivery </option>
+                                            <option value="PickupAndDelivery">Pickup And Delivery </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="d-flex flex-wrap if_xs_btn  justify-content-between tpuprise">
+                                    <div class="cate-align">
+                                        <label>
+                                            <h5>Total : &#8377;{{list?.totalSellingPriceForOrderedItem}}</h5>
+                                        </label>
+
+                                    </div>
+                                    <div class="cate-align">
+                                        <label>
+                                            <h5>Paid : &#8377;{{list?.paidForOrderedItem}}</h5>
+                                        </label>
+
+                                    </div>
+                                    <div class="cate-align">
+                                        <label>
+                                            <h5>Unpaid : &#8377;{{list?.unpaidForOrderedItem}}</h5>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> -->
+
+
+                        <div class="col-md-3  cate-align " style="margin: 0px;" *ngIf="dairyStatus !== true">
+                            <label>Order Type</label>
+                            <select type="text" formControlName="isDairyProduct" (click)="performSearch()"
+                                (change)="filterAllList()" class="control-form mr-20 btn_border">
+                                <option value="2">Grocery</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-12"><label>Date</label></div>
+                                <div class="col-lg-3" style="position: relative; "><input type="text"
+                                    formControlName="fromDate" placeholder="From Date" class="form-control"
+                                    style="background-color: #fff;" (click)="performSearch()" bsDatepicker
+                                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                    (bsValueChange)="setToDateMinDate($event)" [readonly]="true"></div>
+
+                                <div class="col-lg-3" style="position: relative; ">
+                                    <div *ngIf="!isFromDateSelected"
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"
+                                    (click)="onToDateClick()"></div>  <input type="text" formControlName="toDate"
+                                    placeholder="To Date" class="form-control" style="background-color: #fff;"
+                                    bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                    [minDate]="minToDate" [readonly]="true"></div>
+
+
+                                <div class="col-lg-6" style="position: relative;">
+                                    <div class="d-flex" style="gap: 10px;"> <input type="text"
+                                            formControlName="searchQuery" placeholder="Search" class="form-control"
+                                            (click)="performSearch()">
+                                        <button type="submit" (click)="filterAllList()" class="go_now"
+                                            style="color: white;">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+
+
+                <div class=" col-md-3 cate-align ">
+                    <label>Delivery Man </label>
+                    <select type="text" formControlName="deliveryManName" (click)="performSearch()"
+                        (change)="filterAllList()" class="control-form mr-20 btn_border">
+                        <option value="" selected>Select </option>
+                        <option *ngFor="let app of deliveryManList" [ngValue]="app?.deliveryManName">
+                            {{app?.deliveryManName}}
+                        </option>
+
+                    </select>
+                </div>
+                <div class=" col-md-3 cate-align ">
+                    <label>Delivery Type</label>
+                    <select type="text" formControlName="deliveryType" (click)="performSearch()"
+                        (change)="filterAllList()" class="control-form mr-20 btn_border">
+                        <option value="" selected>Select </option>
+                        <option value="Delivery">Delivery</option>
+                        <option value="SelfPickUp">Self Pick Up</option>
+                    </select>
+                </div>
+                <div class=" col-md-3 cate-align ">
+                    <label>Order Status</label>
+                    <select type="text" formControlName="orderStatus" (click)="performSearch()"
+                        (change)="filterAllList()" class="control-form mr-20 btn_border">
+                        <option value="">Select </option>
+                        <option value="Pending">Pending </option>
+                        <option value="Processing">Processing </option>
+                        <option value="ReadyToPickUp">Ready to pick up </option>
+                        <option value="OnTheWay">On The Way </option>
+                        <option value="Delivered"> Delivered </option>
+                        <option value="Cancelled"> Cancelled </option>
+                        <option value="Returned"> Returned </option>
+                    </select>
+                </div>
+                <div class=" col-md-3 cate-align ">
+                    <label>Payment Status</label>
+                    <select type="text" formControlName="paymentStatus" (click)="performSearch()"
+                        (change)="filterAllList()" class="control-form btn_border ">
+                        <option value="" selected>Select </option>
+                        <option value="OnHold">On Hold </option>
+                        <option value="Paid">Paid </option>
+                        <option value="Unpaid">Unpaid </option>
+                        <option value="Refunded">Refunded</option>
+                    </select>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="admin_table table-responsive order-list-table">
+                        <table class="table " #scrollTarget>
+                            <tr>
+                                <th colspan="3">Order Id</th>
+                                <th> Date </th>
+                                <th>Customer Name</th>
+                                <th>Amount</th>
+                                <th>Payment Status </th>
+                                <!-- <th>Payment Receipt</th> -->
+                                <th>Delivery Type </th>
+                                <th>Order Type </th>
+                                <th>Order Status</th>
+                                <th>Note</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr *ngFor="let item of orderlist | filter:searchText | paginate: {itemsPerPage: 5, currentPage: page, totalItems: totalItems,id: '1' }  "
+                                (click)="read(item)">
+
+                                <td style="position: relative;" colspan="3"><label style="    margin: 0;
+                                    padding: 0;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 10px;
+                                " *ngIf="item.isUpdated == true"
+                                        [ngClass]="{ 'updated-item': item.isUpdated == true }">
+                                        <i class="fa fa-circle" aria-hidden="true"
+                                            style="padding: 0;font-size: 10px !important;"></i>
+                                    </label> {{item?.orderId}} </td>
+                                <td> {{item?.orderDate}} </td>
+                                <td>{{item?.customerFirstName}} {{item?.customerLastName}}</td>
+                                <td> {{item?.totalSellingPrice}} </td>
+                                <td class="td-dropdown">
+                                    <select type="text" class="control-form btn_border" formControlName="paymentStatus"
+                                        (change)="paymentStatus()" (change)="orderPaymentStatus(item)">
+                                        <ng-container *ngIf="item.orderStatus === 'Pending'">
+                                            <option [selected]="item.paymentStatus === 'Unpaid'" value="Unpaid">Unpaid
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'OnHold'" value="OnHold">On Hold
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'Paid'" value="Paid">Paid
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.orderStatus === 'Processing'">
+                                            <option [selected]="item.paymentStatus === 'Unpaid'" value="Unpaid">Unpaid
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'OnHold'" value="OnHold">On Hold
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'Paid'" value="Paid">Paid
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.orderStatus === 'ReadyToPickUp'">
+                                            <option [selected]="item.paymentStatus === 'Unpaid'" value="Unpaid">Unpaid
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'OnHold'" value="OnHold">On Hold
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'Paid'" value="Paid">Paid
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.orderStatus === 'OnTheWay'">
+                                            <option [selected]="item.paymentStatus === 'Unpaid'" value="Unpaid">Unpaid
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'OnHold'" value="OnHold">On Hold
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'Paid'" value="Paid">Paid
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.orderStatus === 'Delivered'">
+                                            <option [selected]="item.paymentStatus === 'Paid'" value="Paid">Paid
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.orderStatus === 'Cancelled'">
+                                            <option [selected]="item.paymentStatus === 'Unpaid'" value="Unpaid">Unpaid
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'OnHold'" value="OnHold">On Hold
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'Refunded'" value="Refunded">
+                                                Refunded</option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item.orderStatus === 'Returned'">
+                                            <option [selected]="item.paymentStatus === 'OnHold'" value="OnHold">On Hold
+                                            </option>
+                                            <option [selected]="item.paymentStatus === 'Refunded'" value="Refunded">
+                                                Refunded</option>
+                                        </ng-container>
+                                    </select>
+                                </td>
+                                <!-- <td> <img class="img-responsive scale-hover-img" [src]="rootUrl + item?.paymentReceipt">
+                                </td> -->
+                                <td> {{item.deliveryType}} </td>
+                                <td *ngIf="item.isDairyProduct == true">Dairy</td>
+                                <td *ngIf="item.isDairyProduct == false">Grocery</td>
+                                <td class="td-dropdown">
+                                    <select type="text" class="control-form btn_border" formControlName="orderStatus"
+                                        (change)="orderStatus()" (change)="orderListStatus(item)">
+                                        <ng-container *ngIf="item?.orderStatus === 'Pending'">
+                                            <option value="Pending">Pending</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="ReadyToPickUp">ReadyToPickUp</option>
+                                            <option value="OnTheWay">OnTheWay</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Delivered">Delivered</option>
+
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.orderStatus === 'Processing'">
+                                            <option value="Processing">Processing</option>
+                                            <option value="ReadyToPickUp">ReadyToPickUp</option>
+                                            <option value="OnTheWay">OnTheWay</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Delivered">Delivered</option>
+
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.orderStatus === 'ReadyToPickUp'">
+                                            <option value="ReadyToPickUp">ReadyToPickUp</option>
+                                            <option value="OnTheWay">OnTheWay</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Delivered">Delivered</option>
+
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.orderStatus === 'OnTheWay'">
+                                            <option value="OnTheWay">OnTheWay</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Delivered">Delivered</option>
+
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.orderStatus === 'Delivered'">
+                                            <option value="Delivered">Delivered</option>
+                                            <option value="Returned">Returned</option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.orderStatus === 'Cancelled'">
+                                            <option value="Cancelled">Cancelled</option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.orderStatus === 'Returned'">
+                                            <option value="Returned">Returned</option>
+                                        </ng-container>
+                                    </select>
+                                </td>
+                                <td><i *ngIf="item.customerNote !== '' " class="fa fa-sticky-note-o"
+                                        style="font-weight: 900" (click)="openPreviewModal(item)"></i>
+                                    <i *ngIf="item.customerNote == '' " class="fa fa-sticky-note-o"
+                                        style="color: rgb(167, 161, 161) !important; font-weight: 900"></i>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/orders-list/order-detail/'] + item.orderDetailId">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                </td>
+                                <div class="modal fade" id="myModalpaymentreciept" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog max_sf modal-dialog-centered" role="document"
+                                        style="border-radius:15px; overflow:hidden; border:none;">
+                                        <div class="modal-content popup_advance">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <div class="modal-body text-center">
+                                                <div class="imagePreview vendor-preview">
+                                                    <h3>Customer Note</h3>
+                                                    <h5>{{note}}</h5>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </tr>
+
+                        </table>
+                        <div class="no-data text-center" *ngIf="orderlist?.length < 1">
+                            <img src="assets/img/NO DATA.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <pagination-controls *ngIf="orderlist?.length > 0" (pageChange)="((page = $event))" id="1"
+                (pageIndex)="page" class="paginate-doctor-list" queryParamsHandling="merge" (pageChange)="refresh()"
+                (click)="setScrollPosition()"  >
+            </pagination-controls>
+            <div *ngIf="orderlist?.length > 0">
+
+            </div>
+
+            <!-- <div class="row" style="margin: 0px;" *ngIf="orderlist?.length > 0"  >
+                <div class="col-lg-6 col-md-12" style="padding: 0px 1px;">
+                    <div>
+                        <h3>Product Detail</h3>
+                    </div>
+                    <div class="admin_table table-responsive order-list-table">
+                        <table class="table" (click)="clearAllFilter()">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Count</th>
+                            </tr>
+                            <ng-container *ngFor="let item of list?.productDetail; let i = index" >
+                                <tr *ngIf="i % 2 === 0">
+                                 
+                                    <td>
+                                        {{ item.productName | slice:0:35 }}{{ item.productName.length > 35 ? '...' : ''
+                                        }}
+                                    </td>
+                                    <td>{{ item.quantity }} {{ item.quantityTypeName }}</td>
+                                    <td (click)="scrollToCenter(item)">{{ item.productCount }}</td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-12" style="padding: 0px 1px;">
+                    <div style="text-align: right;margin-bottom: 42px;">
+                    </div>
+                    <div class="admin_table table-responsive order-list-table">
+                        <table class="table">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Count</th>
+                            </tr>
+                            <ng-container *ngFor="let item of list?.productDetail; let i = index">
+                                <tr *ngIf="i % 2 !== 0">
+                                  
+                                    <td>
+                                        {{ item.productName | slice:0:35 }}{{ item.productName.length > 35 ? '...' : ''
+                                        }}
+                                    </td>
+                                    <td>{{ item.quantity }} {{ item.quantityTypeName }}</td>
+                                    <td (click)="scrollToCenter(item)">{{ item.productCount }}</td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </form>
+</div>

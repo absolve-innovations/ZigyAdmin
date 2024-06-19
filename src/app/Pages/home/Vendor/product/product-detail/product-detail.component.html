@@ -1,0 +1,189 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <div class="top-head">
+            <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+            <h2>Product Detail</h2>
+          </div>
+        <div class="vendor-form">
+         
+            <div id="carouselExampleIndicators" class="carousel slide mb-5" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngFor="let item of  productDetail?.productImage; let i = index"
+                        [ngClass]="{'active': i == 0 }">
+                        <img class="d-block w-100" [src]="rootUrl + item?.productImage" alt="First slide">
+                    </div>
+
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+           
+            <div class="vendor-form mt-40" style="background: #fff; padding-bottom: 60px;">
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Vendor Name:</dt>
+                                <dd>{{productDetail?.vendorName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Brand Name:</dt>
+                                <dd>{{productDetail?.brandName}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Shop Name:</dt>
+                                <dd>{{productDetail?.shopName}}</dd>
+                            </dl>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vendor-form mt-30" style="background: #fff; padding-bottom: 60px;">
+                <div class="this_row">
+                    <div class="row ">
+                        <div class="col-lg-12 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Product Name:</dt>
+                                <dd>{{productDetail?.productName}}</dd>
+                            </dl>
+                    
+                            <dl class="d-flex inform_text">
+                                <dt>SKUID:</dt>
+                                <dd>{{productDetail?.skuid}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Main Category Name:</dt>
+                                <dd>{{productDetail?.mainProductCategoryName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Sub Category Name:</dt>
+                                <dd>{{productDetail?.subProductCategoryName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Sub Sub Category Name:</dt>
+                                <dd>{{productDetail?.subSubProductCategoryName}}</dd>
+                            </dl>
+
+                            <dl class=" inform_text">
+                                <dt>Product Description :</dt>
+                                <dd>
+                                    {{productDetail?.productDescription}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vendor-form mt-40" style="background: #fff; padding-bottom: 60px;">
+                <div class="this_row">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>In Stock:</dt>
+                                <dd>{{productDetail?.inStock}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Selling Price:</dt>
+                                <dd>{{productDetail?.sellingPrice}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Manufacturing Date:</dt>
+                                <dd>{{productDetail?.manufacturingDate}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Discount:</dt>
+                                <dd>{{productDetail?.discount}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Container Type Name:</dt>
+                                <dd>{{productDetail?.containerTypeName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Waiting Days:</dt>
+                                <dd>{{productDetail?.waitingDays}}</dd>
+                            </dl>
+
+                            <dl class="d-flex inform_text">
+                                <dt>Status Display:</dt>
+                                <dd>{{productDetail?.stausDisplay}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <dl class="d-flex inform_text">
+                                <dt>Quantity:</dt>
+                                <dd>{{productDetail?.quantity}} {{productDetail?.quantityTypeName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>MRP:</dt>
+                                <dd>{{productDetail?.mrp}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Expiry Date:</dt>
+                                <dd>{{productDetail?.expiryDate}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Discount Type Name:</dt>
+                                <dd>{{productDetail?.discountTypeName}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Flavour:</dt>
+                                <dd>{{productDetail?.flavour}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Shipping Charges:</dt>
+                                <dd>{{productDetail?.shippingCharges}}</dd>
+                            </dl>
+                            <dl class="d-flex inform_text">
+                                <dt>Speciality Name:</dt>
+                                <dd>{{productDetail?.specialityName}}</dd>
+                            </dl>
+
+
+
+
+
+                        </div>
+                        <div class="col-lg-12">
+                            <dl class=" inform_text">
+                                <dt>Ingredients:</dt>
+                                <dd>{{productDetail?.ingredients}}</dd>
+                            </dl>
+                            <dl class=" inform_text">
+                                <dt>Nutrition Fact:</dt>
+                                <dd>{{productDetail?.nutritionFact}}</dd>
+                            </dl>
+                            <dl class=" inform_text">
+                                <dt>Storage And Uses:</dt>
+                                <dd>{{productDetail?.storageAndUses}}</dd>
+                            </dl>
+                            <dl class=" inform_text">
+                                <dt>How To Use:</dt>
+                                <dd>{{productDetail?.howToUse}}</dd>
+                            </dl>
+                            <dl class="inform_text">
+                                <dt>Other Product Info:</dt>
+                                <dd>{{productDetail?.otherProductInfo}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

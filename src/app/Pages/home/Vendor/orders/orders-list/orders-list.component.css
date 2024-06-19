@@ -1,0 +1,33 @@
+.updated-item{
+    font-weight: bold;
+    color: blue; 
+}
+
+
+.Servicepackage {
+    background: #e9e9e9;
+    padding: 4px 15px;
+    width: 100%;
+    margin: 0px 15px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bs-datepicker-body table td.week span {
+    color: #fff!important;
+}
+
+
+
+.tpuprise .cate-align label, .tpuprise .cate-align h5 {
+    margin: 0;
+}
+.tpuprise .cate-align {
+    margin: 0;
+}
+.tpuprise {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+}

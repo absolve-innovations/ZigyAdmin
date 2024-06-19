@@ -1,0 +1,68 @@
+<div class="overflow-hidden login-body">
+    <!-- <header class="header-section">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-2 col-md-3 col-5">
+                <img src="https://dummyimage.com/600x200/ddd/fff" class="img-responsive xs-sm-logo" />
+            </div>                        
+        </div>
+    </div>
+</header> -->
+    <div class="container-fluid login_page">
+        <div class="row">
+
+            <div
+                class="col-lg-6 col-md-6 p-0 text-center d-flex flex-wrap align-items-center justify-content-center bg-white">
+
+                <div class="sm_condition">
+                    <img src="assets\img\logo.png" class="img-responsive mb-30" fetchpriority="high">
+                    <h3> Welcome to our<br> website</h3>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center ">
+                <div class="login">
+                    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                        <div class="form-landing">
+                            <h3>Login</h3>
+                            <label>Email or Phone number</label>
+                            <input type="text" placeholder="" class="form-control" formControlName="emailOrPhone"
+                                [ngClass]="{ 'is-invalid': submitted && f['emailOrPhone'].errors }">
+                            <div *ngIf="submitted && f['emailOrPhone'].errors" class="help-block">
+                                <div *ngIf="f['emailOrPhone'].errors['required']" style="color: #fd0000;">Email or Phone
+                                    is
+                                    required</div>
+                            </div>
+
+                            <div class="position-relative mt-20">
+                                <label>Password</label>
+                                <input [type]="password" class="form-control login-inputpass" formControlName="password"
+                                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+
+
+                                <div class="input-group-append login-eye-icon" (click)="onClick()">
+                                    <i class="fa fa-eye-slash eye-icon eye-icon-align " aria-hidden="true"
+                                        *ngIf="!show"></i>
+                                    <i class="fa fa-eye " aria-hidden="true" *ngIf="show"></i>
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && f['password'].errors" class="help-block"
+                                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                <div *ngIf="f['password'].errors['required']" style="color: #fd0000; margin-top: 3px;">
+                                    Password is
+                                    required</div>
+                            </div>
+
+                            <!-- <input type="submit" value="Send OTP" /> -->
+                            <button type="submit">Submit</button>
+
+                            <!-- <a [routerLink]="['/forgotpassword']"  class="forget_link">Forgot Password</a> -->
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

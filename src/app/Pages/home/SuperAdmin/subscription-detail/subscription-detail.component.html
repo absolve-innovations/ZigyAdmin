@@ -1,0 +1,148 @@
+<div class="app-main__outer">
+    <div class="admin_a form_dashbord">
+        <div class="d-flex flex-wrap if_xs_btn mt-30 v-detail">
+            <div class="top-head">
+                <img (click)="backClicked()" src="assets\img\backimage.png" class="backimage-butn">
+                <h2>Subscription Detail</h2>
+            </div>
+        </div>
+
+        <div class="vendor-form mt-40 bg-white pb-60">
+            <div class="this_row">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>First Name:</dt>
+                            <dd>{{subscriptionDetail?.customerFirstName}}
+                            </dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Delivery Type:</dt>
+                            <dd>{{subscriptionDetail?.deliveryType}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Create Date:</dt>
+                            <dd>{{subscriptionDetail?.createDate}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Selling Price:</dt>
+                            <dd>{{subscriptionDetail?.totalSellingPrice}}</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Last Name:</dt>
+                            <dd>{{subscriptionDetail?.customerLastName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Subscription Status:</dt>
+                            <dd>{{subscriptionDetail?.subscriptionStatus}}</dd>
+                        </dl>
+
+
+                        <dl class="d-flex inform_text">
+                            <dt>Create Time:</dt>
+                            <dd>{{subscriptionDetail?.createTime}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Shipping Charges:</dt>
+                            <dd>{{subscriptionDetail?.shippingCharges}}</dd>
+                        </dl>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- end first form -->
+
+        <div class="vendor-form mt-30" style="background:#fff; padding-bottom:60px;">
+
+            <h3>Subscription Type</h3>
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Subscription Days:</dt>
+                            <dd *ngIf="subscriptionDetail?.monday !== 'true'">Monday,</dd>&nbsp;
+                            <dd *ngIf="subscriptionDetail?.tuesday !== 'true'">Tuesday,</dd>&nbsp;
+                            <dd *ngIf="subscriptionDetail?.wednesday !== 'true'">Wednesday,</dd>&nbsp;
+                            <dd *ngIf="subscriptionDetail?.thursday !== 'true'">Thursday,</dd>&nbsp;
+                            <dd *ngIf="subscriptionDetail?.friday !== 'true'">Friday,</dd>&nbsp;
+                            <dd *ngIf="subscriptionDetail?.saturday !== 'true'">Saturday,</dd>&nbsp;
+                            <dd *ngIf="subscriptionDetail?.sunday !== 'true'">Sunday</dd>&nbsp;
+                        </dl>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Address Type:</dt>
+                            <dd>{{subscriptionDetail?.addressType}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Street Address:</dt>
+                            <dd>{{subscriptionDetail?.streetAddress}} {{subscriptionDetail?.city}}
+                                ({{subscriptionDetail?.pincode}})
+                            </dd>
+                        </dl>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+
+                        <dl class="d-flex inform_text">
+                            <dt>Ship To Name:</dt>
+                            <dd>{{subscriptionDetail?.shipToName}}</dd>
+                        </dl>
+
+                        <dl class="d-flex inform_text">
+                            <dt>Order Morning Or Evening:</dt>
+                            <dd>{{subscriptionDetail?.morningOrEveningOrder}}</dd>
+                        </dl>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- <div class="vendor-form mt-30"> -->
+
+            <h3 class="mt-40">Order List</h3>
+            <div class="col-lg-12 p-0">
+                <div class="table-responsive mt-20">
+                    <table class="table admin_table  product-detail-table">
+                        <tr>
+                            <th>Product Image</th>
+                            <th>Product Name</th>
+                            <th>Type</th>
+                            <th>Selling Price</th>
+                            <th>Count</th>
+                            <th>Shipping Charges</th>
+                        </tr>
+                        <tr *ngFor="let item of subscriptionDetail?.orderedProducts; let i =index">
+                            <td class="profile">
+                                <a href="#" data-toggle="modal" data-target="#myModalQR">
+                                    <img class="img-responsive scale-hover-img" [src]="rootUrl + item?.productImage"
+                                        data-toggle="tooltip" data-placement="left" title="Preview">
+                                </a>
+                            </td>
+                            <td>{{item?.productName}}</td>
+                            <td>{{item.containerTypeName}}</td>
+                            <td>{{item?.totalSellingPrice}} </td>
+                            <td>{{item?.productCountInCart}} </td>
+                            <td>{{item?.shippingCharges}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,34 @@
+<div class="app-main__outer">
+    <div class="admin_a">
+        <h2 class="text-center mt-30">Vendor Upi Detail</h2>
+
+        <div class="object-product-detail-img image-back mt-40 mx-auto" style="background: #fff; padding-bottom: 60px;">
+            <img class="image"
+            [src]="rootUrl + data?.productImage"> </div>
+
+        <div class="vendor-form mt-40" style="background: #fff; padding-bottom: 60px;">
+            <div class="this_row">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <dl class="d-flex inform_text">
+                            <dt>Bank Name:</dt>
+                            <dd>{{data?.bankName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>UPI Id:</dt>
+                            <dd>{{data?.upiid}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Bank Account Holder Name:</dt>
+                            <dd>{{data?.accountHolderName}}</dd>
+                        </dl>
+                        <dl class="d-flex inform_text">
+                            <dt>Is Active:</dt>
+                            <dd>{{data?.isActive}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,190 @@
+
+<div class="app-main__outer">
+
+
+
+
+    <div class="admin_a form_dashbord">
+        <form [formGroup]="form">
+        <div class="tab-butns" *ngIf="login == 'Vendor'">
+
+            <div class="d-flex if_xs_btn mt-30">
+                <input type="text" placeholder="Search Here" class="btn_border search_here"
+                    [(ngModel)]="searchText"  (click)="performSearch()">
+                <a [routerLink]="['/vendor/setting/delivery-man-list/add-edit-delivery-man']" class="btn_blue ml-auto" *ngIf="activeTab === 'pills-categorylist'">Add Delivery Man</a>
+                <a  class="btn_blue ml-auto"  *ngIf="activeTab === 'pills-categoryrequest'" style="visibility: hidden"></a>
+
+        
+                <!-- <div class="col-lg-3" style="position: relative; " *ngIf="activeTab === 'pills-categoryrequest'"><input type="text"
+                    formControlName="searchByDate" placeholder="Search By Date" class="form-control" [(ngModel)]="date"
+                    style="background-color: #fff;" (click)="performSearch()" bsDatepicker   (ngModelChange)="onDateChange()" 
+                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"[readonly]="true"></div> -->
+
+
+                <!-- <div class="col-md-3  cate-align " style="margin: 0px;"  *ngIf="activeTab === 'pills-categoryrequest'">
+                    <label>Order Type</label>
+                    <select type="text"  (click)="performSearch()"
+                    formControlName="isDairyProduct" (change)="getAssignOrderToDeliveryManList()"  class="control-form mr-20 btn_border">
+                   
+                        <option value="2">Grocery</option>
+                        <option value="1">Dairy</option>
+                       
+
+                    </select>
+                </div> -->
+
+                <!-- <div class="col-md-3  cate-align " style="margin: 0px;"  *ngIf="activeTab === 'pills-categoryrequest'">
+                    <label>Order Timing</label>
+                    <select type="text"  (click)="performSearch()"
+                    formControlName="MorningOrEveningOrder" (change)="getAssignOrderToDeliveryManList()"  class="control-form mr-20 btn_border">
+
+                        <option value="" selected>All</option>
+                        <option value="Morning">Morning</option>
+                        <option value="Evening">Evening</option>
+
+                    </select>
+                </div> -->
+              
+            </div>
+            <ul class="nav nav-pills nav-justified mb-5 tab-pills" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active category-tabs" [class.active]="activeTab === 'pills-categorylist'" (click)="switchToTab('pills-categorylist')" >Delivery Man List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active category-tabs" [class.active]="activeTab === 'pills-categoryrequest'" (click)="switchToTab('pills-categoryrequest')">Assigned Order List</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div *ngIf="activeTab === 'pills-categorylist'" class="tab-pane fade show active" id="pills-categorylist" role="tabpanel">
+
+
+                    <div class="table-responsive">
+                        <table class="table admin_table">
+
+                            <tr>
+                                <th>Delivery Man Name</th>
+                                <th>Phone No.</th>
+                                <th>Whats App No.</th>
+                                <th>Area Code</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr
+                            
+                                *ngFor="let item of deliveryManListList  | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page1, totalItems: totalItems,id: '1' } ">
+        
+                                <td>{{item?.deliveryManName}}</td>
+                                <td>{{item?.deliveryManPhoneNumber}}</td>
+                                <td>{{item?.deliveryManWhatsappNumber}}</td>
+                                <td>{{item?.areaCodeId}}</td>
+                                <td>
+                                    <a (click)="edit(item)"><i class="fa fa-pencil"></i></a>
+                                    <a [routerLink]="['/vendor/setting/delivery-man-list/detail/',item.deliveryManId ] "><i
+                                            class="fa fa-eye"></i></a>
+                                            <a (click)="deleteDeliveryMan(item.deliveryManId)"><i
+                                    
+                                                class="fa fa-times"></i></a>
+                                </td>
+        
+                            </tr>
+                        </table>
+                        <div class="no-data text-center" *ngIf="deliveryManListList?.length < 1">
+                            <img src="assets/img/NO DATA.png">
+                        </div>
+                        <pagination-controls *ngIf="activeTab === 'pills-categorylist'" (pageChange)="page1 = $event; updateQueryParams()" [id]="'1'" pageSize="10" initialPage="page1"></pagination-controls>
+
+                    </div>
+                </div>
+                <div *ngIf="activeTab === 'pills-categoryrequest'" class="tab-pane fade show active" id="pills-categoryrequest" role="tabpanels">
+                    <div class="table-responsive" >
+                        <table class="table admin_table">
+
+                            <tr>
+                      
+                                <th>Delivery Man Name</th>
+                                <!-- <th>Whats App Number</th> -->
+                                <th>Area Code</th>
+                                <th>Total Order</th>
+                                <th>Timing</th>
+                                <th>Status</th>                      
+                                <th>Action</th>
+                               
+                            </tr>
+                            <tr
+                                *ngFor="let item of assignedOrderList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page2, totalItems: totalItems,id: '2' }  ">
+                                <td>{{item?.deliveryManName}}</td>                             
+                                <td>{{item?.areaCodeId}}</td>
+                                <td>{{item?.totalOrders}}</td>
+                                <td>{{item?.timing}}</td>
+                                <td class="td-dropdown">
+                                    <select type="text" class="control-form btn_border" formControlName="status" (change)="orderListStatus(item)"
+                                        >
+                                        <ng-container *ngIf="item?.status === 'Pending'">
+                                            <option value="Pending">Pending</option>
+                                         
+                                          
+                                            <option value="OnTheWay">OnTheWay</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Completed">Completed</option>
+
+                                        </ng-container>
+                  
+                               
+                                        <ng-container *ngIf="item?.status === 'OnTheWay'">
+                                            <option value="OnTheWay">OnTheWay</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Completed">Completed</option>
+
+                                        </ng-container>
+                                       
+                                        <ng-container *ngIf="item?.status === 'Cancelled'">
+                                            <option value="Cancelled">Cancelled</option>
+                                        </ng-container>
+                                        <ng-container *ngIf="item?.status=== 'Completed'">
+                                            <option value="Completed">Completed</option>
+                                        </ng-container>
+                                      
+                                    </select>
+                                </td>
+                             
+
+                             
+                                <td>
+
+                                    <!-- <a *ngIf="item.isNext == true"
+                                        [routerLink]="['/category-list/sub-category/'] + item?.mainProductCategoryId "><i
+                                            class="fa fa-eye"></i></a>
+                                    <a *ngIf="item.isNext == false"><i
+                                            style="background:#d1d5da; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                                            class="fa fa-eye"></i></a> -->
+                                            <a (click)="navigate(item)"><i
+                                                class="fa fa-eye"></i></a>
+
+                                    <!-- <a><i class="fa fa-pencil"></i></a> -->
+                                       <!-- <a (click)="deleteBrand(item.brandId)"><i
+                                    
+                                    class="fa fa-times"></i></a> -->
+                                  
+                                    <!-- <a data-toggle="modal" data-target="#categoryrequest-cross-mess" (click)="delet(item)">
+                                        <i class="fa fa-times"></i>
+                                    </a> -->
+
+                                </td>
+
+                            </tr>
+                        </table>
+                        <div class="no-data text-center" *ngIf="assignedOrderList?.length < 1">
+                            <img src="assets/img/NO DATA.png">
+                        </div>
+                        <pagination-controls *ngIf="activeTab === 'pills-categoryrequest'" (pageChange)="page2 = $event; updateQueryParams()" [id]="'2'"pageSize="10" initialPage="page2"></pagination-controls>
+
+                    </div>
+
+                </div> 
+            </div>
+
+        </div>
+    </form>
+
+      
+    </div>
+</div>

@@ -1,0 +1,146 @@
+
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header"
+    [ngClass]="show ? 'closed-sidebar' : ''" id="sideBar">
+    <!-- Top-nav -->
+    <!-- <app-header (collapseSideNav)="sideNavDisplay($event)"></app-header> -->
+
+    <div class="app-header header-shadow">
+        <div class="app-header__logo">
+            
+            <div class="logo-src text-center">
+                <img src="assets/img/logo.png" class="img-responsive">
+            </div>
+            
+            <div class="header__pane ml-auto"> 
+                <div>                 
+                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" [ngClass]="show ?  'is-active' : ''" (click)="sideNav()"
+                
+                   >
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>  
+                </div>                  
+            </div>
+            
+        </div>
+        
+        <div class="app-header__mobile-menu">
+            <div>
+                <button type="button"  class="hamburger hamburger--elastic mobile-toggle-nav" [ngClass]="showToggle ?  'is-active' : ''" (click)="sideNavDisplay($event)">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- <div class="app-header__menu">
+            <span>
+                <button type="button"  
+                    class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                    <span class="btn-icon-wrapper">
+                        <i class="fa fa-sign-out"></i>
+                    </span>
+                </button>
+            </span>
+        </div> -->
+        
+        <!-- <div class="app-header__content">
+            <div class="app-header-left">
+                <div class="notify-box float-right">
+                <a href="#" class="notification mr-20 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span><i class="fa fa-bell" aria-hidden="true"></i></span>
+                    <span class="badge">{{count}}</span>
+                  </a>
+                 <div class="notify-subbox dropdown-menu" id="myDIV5" aria-labelledby="dropdownMenuButton">
+                    <div class="notify-header">
+                        <h5>Notification</h5>
+                        <a href="#" class="clear-notify">Clear All</a>
+                    </div>
+                    <div class="first-notifi" *ngFor="let item of notificationList">
+                        <div class="notification-ist ">
+                            <div class="flexi-data  mb-2">
+                            <h6>{{item.title}}</h6>
+                            <p>{{item.createDate}}</p>
+                            </div>
+                                <p>{{item.description}}</p>
+                            <a href="#" class="dismiss ml-auto">Dismiss</a>
+                        </div>
+
+                      
+                     
+
+                    </div>
+                 </div>
+                </div>
+                <label class="log_out" (click)="logouts()">Logout</label>
+            </div>
+        </div> -->
+
+      
+
+
+        <div class="dropdown app-header__menu">
+            <button class=" btn-icon btn-icon-only btn-sm mobile-toggle-header-nav dropdown-toggle" type="button" id="dropdownMenuButtonlg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="btn-icon-wrapper">
+                    <i class="fa fa-sign-out"></i>
+                </span>
+            </button>
+            <div class="dropdown-menu text-center sm-logout" aria-labelledby="dropdownMenuButtonlg">
+                    <label class="log_out" (click)="logouts()">Logout</label>
+            </div>
+          </div>
+
+
+        <div class="app-header__content">
+            <div class="app-header-left">
+                <div class="notify-box ">
+                  
+                    <i class="fa fa-hourglass" *ngIf="login == 'Vendor' " aria-hidden="true" style="color: #002C6F;" [routerLink]="['/membership-plan-list']"></i>&nbsp;
+                    <label [routerLink]="['/membership-plan-list']" *ngIf="login === 'Vendor'" style="color:red">{{daysLeft}}</label>
+                <a  class="notification mr-10 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span><i  class="fa fa-bell-o" aria-hidden="true"></i></span>
+                    <span *ngIf="count != '0'"  class="badge" (click)="getReadNotiction()" >{{count}}</span>
+                  </a>
+                 <div class="notify-subbox dropdown-menu" id="myDIV5" aria-labelledby="dropdownMenuButton">
+                    <div class="notify-header" >
+                        <h5>Notification</h5>
+                        <a  class="clear-notify" (click)="deleteAllNotification()">Clear All</a>
+                    </div>
+                    <div class="first-notifi" *ngFor="let item of notificationList">
+                        <div class="notification-ist ">
+                            <div class="flexi-data ">
+                            <h6>{{item.title}}</h6>
+                            <p>{{item.createDate}}</p>
+                            </div>
+                                <p>{{item.description}}</p>
+                            <a  class="dismiss ml-auto" (click)="deleteSingleNotification(item.notificationSentId)">Dismiss</a>
+                        </div>  
+                    </div>
+                 </div>
+                </div>
+                <!-- <div class="notify-box ">
+                    <a  class="notification mr-10 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      </a>
+                     <div class="notify-subbox dropdown-menu" id="myDIV5" aria-labelledby="dropdownMenuButton">
+                       1234
+                     </div>
+                    </div> -->
+                 
+                <label class="log_out" (click)="logouts()">Logout</label>
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+    <!-- Sidebar -->
+    <div class="app-main main-outer">
+    <app-menu  [showSideNav]="show"></app-menu>
+
+    <!-- Layout -->
+    <router-outlet></router-outlet>
+    </div>
+
+</div>

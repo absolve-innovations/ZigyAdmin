@@ -1,0 +1,38 @@
+<div class="app-main__outer">
+  <div class="admin_a">
+    <div class="vendor-form mt-40" style="background:#fff; padding-bottom:60px;">
+
+      <div class="this_row" #htmlElement #htmlContainer>
+
+        <div class="row">
+
+          <div class="space-50"></div>
+
+          <div class="col-lg-8 offset-2 col-md-12" style="border: 1px solid #ccc; padding: 50px;">
+            <div class="tick-icon text-center mb-40">
+              <a><img src="assets/img/incorrect.png" title="correct icons"></a>
+            </div>
+            <div class="text-center mb-40">
+              <h2>Oops! There was an error processing your transaction.</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 mt-40 text-center">
+        <button class="border-btn" type="submit" [routerLink]="['/super-vendor-list']">Try Again</button>
+      </div>
+      <!-- <div class="col-lg-12 col-md-12 mt-40 text-center" *ngIf="data.paymentSuccess === true  && data.state !== 'PENDING'" >
+        <button class="border-btn" type="submit" value=""  (click)="downloadDesign()">Download</button>
+        <button class="btn_blue " type="submit" value="" [routerLink]="['/membership-plan-list']"
+        *ngIf="'Vendor' == role">Close</button>
+        <button class="btn_blue " type="submit" value="" [routerLink]="['/super-vendor-list/super-add-vendor']"
+        *ngIf="'Admin' == role">Next</button>
+        <button class="btn_blue " type="submit" value="" [routerLink]="['/super-vendor-list/super-add-vendor']"
+        *ngIf="'SuperAdmin' == role">Next</button>
+        <button class="btn_blue " type="submit" value="" [routerLink]="['/super-vendor-list/super-add-vendor']"
+        *ngIf="'Distributor' == role">Next</button>
+    </div> -->
+    </div>
+
+  </div>
+</div>

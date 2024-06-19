@@ -1,0 +1,44 @@
+<div class="app-main__outer">	
+    <div class="admin_a">
+        <div class="d-flex flex-wrap if_xs_btn mb-30">
+            <input type="text" placeholder="Search Collection" href="#" class="btn_border search_here"  [(ngModel)]="searchText">
+          
+                <a  [routerLink]="['/collection-list/collection-add-edit']" class="btn_blue ml-auto" >Add New Collection</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table admin_table">
+                <tr>
+                    <th>Collection Name </th>
+                    <th>Collection Image</th>
+                    <th>Date</th>
+                    
+                    <th>Action</th>
+                </tr>
+                <tr  *ngFor="let item of collectionList | filter:searchText | paginate: {itemsPerPage: 10, currentPage: page, totalItems: totalItems,id: '1' }  ">
+                    <td class="profile">
+                        {{item?.collectionName}}
+                    </td>
+                    <td>  <img  [src]="rootUrl + item?.collectionImage" class="img-responsive xs-sm-logo" /></td>
+
+                    <td>{{item?.createDate}}</td>
+                    <td>
+                        <a [routerLink]="['/collection-list/collection-detail/'] + item?.collectionId "><i style="background:#3270b8; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                                class="fa fa-eye"></i></a>
+                                
+                        <a (click)="editcollection(item)"><i style="background:#10b9d0; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                                class="fa fa-pencil"></i></a>
+                                <a (click)="deleteCollection(item.collectionId)"><i style="background:#9f0a2a; color:#fff; padding: 6px; border-radius: 5px; font-size: 14px;"
+                                    class="fa fa-times"></i></a>
+                    </td>
+                </tr>  
+            </table>
+            <div class="no-data text-center" *ngIf="collectionList?.length < 1">
+                <img src="assets/img/NO DATA.png">
+            </div>
+            <pagination-controls (pageChange)="((page = $event))" id="1" (pageIndex)="page"
+                class="paginate-doctor-list">
+            </pagination-controls>
+        </div>
+    </div>
+</div>
